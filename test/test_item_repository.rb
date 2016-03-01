@@ -64,4 +64,15 @@ class ItemRepositoryTest < Minitest::Test
     assert_equal "SALE Rudolf Reindeer Dummy Clip", items.first[:name]
   end
 
+  def test_find_all_by_price_returns_all_matching_price_range_given
+    items = ir.find_all_by_price_in_range(100..150)
+    assert_equal 5, items.length
+    assert_equal "Candy bath bombs", items.first[:name]
+  end
+
+  def test_find_all_by_merchant_id_returns_all_matching_merchant_id
+    items = ir.find_all_by_merchant_id("12334105")
+    assert_equal "Vogue Paris Original Givenchy 2307", items.first[:name]
+  end
+
 end

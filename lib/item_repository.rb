@@ -1,7 +1,7 @@
 require 'csv'
 require 'pry'
 require_relative 'csv_loader'
-
+require_relative 'merchant_repository'
 class ItemRepository
   attr_reader :items
   include CsvLoader
@@ -38,12 +38,16 @@ class ItemRepository
     end
   end
 
-  def find_all_by_price_in_range
-
-    # returns either [] or instances of Item where the supplied price is in the supplied range (a single Ruby range instance is passed in)
+  def find_all_by_price_in_range(price_range)
+    items.select do |item|
+      item[:unit_price].to_i >= price_range.to_a.first && item[:unit_price].to_i <= price_range.to_a.last
+    end
   end
 
-  def find_all_by_merchant_id
+  def find_all_by_merchant_id(merchant_id)
+    items.select do |item|
+      item[:merchant_id] == merchant_id
+    end
     #  returns either [] or instances of Item where the supplied merchant ID matches that supplied
   end
 

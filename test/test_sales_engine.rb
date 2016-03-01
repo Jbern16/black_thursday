@@ -11,7 +11,12 @@ class SalesEngineTest < Minitest::Test
   end
 
   def test_from_csv_takes_an_argument
-    assert SalesEngine.from_csv({})
+    se = SalesEngine.from_csv({
+      :items     => "./data/items.csv",
+      :merchants => "./data/merchants.csv"
+      })
+
+    assert_equal "", se.merchants.first
   end
 
   def test_from_csv_method_when_used_on_an_instance_of_sales_engine

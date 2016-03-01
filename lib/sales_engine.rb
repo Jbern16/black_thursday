@@ -1,18 +1,14 @@
 require 'csv'
 require 'pry'
+require_relative 'item_repository'
+require_relative 'merchant_repository'
 
 class SalesEngine
-    attr_reader :items,
+    attr_accessor :items,
                 :merchants
-  def initialize
-    @items = ItemRepository.new
-    @merchants = MerchantRepository.new
-  end
 
   def self.from_csv(data_hash)
-  end
-
-  def load(data_hash)
-    # CSV.open(data_hash[:items], headers: true, header_converters: :symbol)
+    ItemRepository.new(data_hash[:items])
+    MerchantRepository.new(data_hash[:merchants])
   end
 end

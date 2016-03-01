@@ -8,7 +8,7 @@ class MerchantRepository
   include CsvLoader
 
   def initialize(file_path)
-    @merchants = load(file_path).map { |row| row } if file_path  
+    @merchants = load(file_path).map { |row| row } if file_path
   end
 
 

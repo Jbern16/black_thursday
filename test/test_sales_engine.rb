@@ -10,13 +10,13 @@ class SalesEngineTest < Minitest::Test
     assert SalesEngine.new
   end
 
-  def test_from_csv_takes_an_argument
+  def test_from_csv_creates_item_repository
     se = SalesEngine.from_csv({
       :items     => "./data/items.csv",
       :merchants => "./data/merchants.csv"
       })
-
-    assert_equal "", se.merchants.first
+      assert se.merchants
+      assert se.items
   end
 
   def test_from_csv_method_when_used_on_an_instance_of_sales_engine

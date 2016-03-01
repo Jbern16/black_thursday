@@ -3,51 +3,47 @@ require 'minitest/pride'
 require 'csv'
 require_relative '../lib/merchant_repository'
 require_relative '../lib/sales_engine'
+require_relative '../lib/merchant'
 
 class MerchantRepositoryTest < Minitest::Test
-  attr_reader :mr
+  attr_reader :mr, :merchants
 
   def setup
-    se = SalesEngine.from_csv({
-      :items     => "./data/items.csv",
-      :merchants => "./data/merchants.csv",
-      })
-
-    @mr = se.merchants
+    @mr = MerchantRepository.new
+    @merchants = mr.merchants =
+                  [Merchant.new({id: 5, name: "Turing School"}),
+                  Merchant.new({id: 7, name: "Tom School"}),
+                  Merchant.new({id: 9, name: "CoolDecor"})]
   end
 
   def test_all_method_returns_array
     merchant = mr.all
 
-    assert_equal Array, merchant.class
+    assert_equal @merchants, merchant
   end
 
   def test_find_by_id_method_returns_merchant_with_matching_id
-    answer = "Shopin1901"
-    merchant = mr.find_by_id("12334105")
-
-    assert_equal answer, merchant[:name]
+    answer = "Tom School"
+    merchant = mr.find_by_id(7)
+    assert_equal answer, merchant.name
   end
 
   def test_find_by_id_method_returns_nil_if_doesnt_match_merchants
-    answer = nil
     merchant = mr.find_by_id("999999999")
 
-    assert_equal answer, merchant
+    assert_equal nil, merchant
   end
 
   def test_find_by_name_method_returns_merchant_with_matching_name
-    answer = "12334105"
-    merchant = mr.find_by_name("Shopin1901")
+    merchant = mr.find_by_name("Tom School")
 
-    assert_equal answer, merchant[:id]
+    assert_equal 7, merchant.id
   end
 
   def test_find_by_name_method_returns_merchant_with_matching_name_even_if_case_is_off
-    answer = "12334105"
-    merchant = mr.find_by_name("SHOPin1901")
+    merchant = mr.find_by_name("CoOlDECOR")
 
-    assert_equal answer, merchant[:id]
+    assert_equal 9, merchant.id
   end
 
   def test_find_by_name_method_returns_nil_if_doesnt_match_merchants
@@ -58,10 +54,12 @@ class MerchantRepositoryTest < Minitest::Test
   end
 
   def test_find_all_by_name_method_returns_array_of_matching_merchants
-    answer = "[#<CSV::Row id:\"12336642\" name:\"southernncreations\" created_at:\"2006-10-24\" updated_at:\"2015-04-03\">, #<CSV::Row id:\"12336889\" name:\"SouthernComfrtCndles\" created_at:\"2003-09-27\" updated_at:\"2004-06-30\">]"
-    merchant = mr.find_all_by_name("ouThe")
+    answer = "Turing School"
+    answer2 = "Tom School"
+    merchants = mr.find_all_by_name("Scho")
 
-    assert_equal answer, merchant.to_s
+    assert_equal answer, merchants[0].name
+    assert_equal answer2, merchants[1].name
   end
 
 end

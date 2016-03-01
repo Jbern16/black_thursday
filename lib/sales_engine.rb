@@ -7,8 +7,8 @@ class SalesEngine
   attr_reader :items, :merchants
 
   def self.from_csv(data_hash)
-    @items = MerchantRepository.new(data_hash[:merchants])
-    @merchants = ItemRepository.new(data_hash[:items])
+    @merchants = MerchantRepository.new(data_hash[:merchants])
+    @items = ItemRepository.new(data_hash[:items])
 
     SalesEngine
   end

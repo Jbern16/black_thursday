@@ -6,9 +6,9 @@ require_relative 'merchant_repository'
 class SalesEngine
   attr_reader :items, :merchants
 
-  def self.from_csv(data_hash)
-    @merchants = MerchantRepository.new(data_hash[:merchants])
-    @items = ItemRepository.new(data_hash[:items])
+  def self.from_csv(data)
+    @merchants = MerchantRepository.new(data[:merchants])
+    @items = ItemRepository.new(data[:items])
 
     SalesEngine
   end

@@ -25,6 +25,7 @@ class MerchantRepositoryTest < Minitest::Test
   def test_find_by_id_method_returns_merchant_with_matching_id
     answer = "Tom School"
     merchant = mr.find_by_id(7)
+
     assert_equal answer, merchant.name
   end
 

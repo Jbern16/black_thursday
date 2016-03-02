@@ -13,14 +13,15 @@ class Item
     @id = data[:id]
     @name = data[:name]
     @description = data[:description]
-    @unit_price = data[:unit_price]
+    @unit_price = BigDecimal.new(data[:unit_price])
     @created_at = data[:created_at]
     @updated_at = data[:updated_at]
     @merchant_id = data[:merchant_id]
   end
 
   def unit_price_to_dollars
-    unit_price.to_f
+    unit_price_as_dollars = @unit_price / 100
+    sprintf('%.2f', unit_price_as_dollars)
   end
 
   def merchant(merchant_id)
@@ -37,4 +38,5 @@ class Item
   def updated_at
     Time.parse(@updated_at)
   end
+
 end

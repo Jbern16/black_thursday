@@ -15,7 +15,7 @@ class ItemTest < Minitest::Test
                      id: 5,
                      name: "Pencil",
                      description: "You can use it to write things",
-                     unit_price: BigDecimal.new(10.99,4),
+                     unit_price: BigDecimal.new("6000"),
                      created_at: "1995-03-19 10:02:43 UTC",
                      updated_at: "2000-03-19 10:02:43 UTC",
                      merchant_id: 1222
@@ -36,7 +36,7 @@ class ItemTest < Minitest::Test
   end
 
   def test_unit_price_returns_items_price
-    assert_equal BigDecimal.new(10.99,4), item.unit_price
+    assert_equal BigDecimal.new("6000"), item.unit_price
   end
 
   def test_created_at_returns_time_item_was_created_as_a_time_object
@@ -52,7 +52,7 @@ class ItemTest < Minitest::Test
   end
 
   def test_unit_price_in_dollars_returns_price_of_item_as_float
-    assert_equal 10.99, item.unit_price_to_dollars
+    assert_equal "60.00", item.unit_price_to_dollars
   end
 
 end

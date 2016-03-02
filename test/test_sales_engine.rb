@@ -19,7 +19,6 @@ class SalesEngineTest < Minitest::Test
 
     assert se.merchants
     assert se.items
-    binding.pry
   end
 
   def test_from_csv_method_when_used_on_an_instance_of_sales_engine

@@ -11,8 +11,6 @@ class MerchantRepository
   def initialize(file_path=nil)
     unless file_path.nil?
       @merchants = load(file_path).map { |merchant| Merchant.new(merchant)}
-    else
-      @merchants = []
     end
   end
 

@@ -21,9 +21,11 @@ class Item
     unit_price.to_f
   end
 
-
-
-
-
+  def merchant
+    merchant = MerchantRepository.new("./data/merchants.csv")
+    merchant.merchants.find do |merchant|
+      merchant.id == merchant_id
+    end
+  end
 
 end

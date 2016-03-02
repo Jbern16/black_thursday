@@ -10,9 +10,7 @@ class ItemRepository
 
   def initialize(file_path=nil)
     unless file_path.nil?
-      @items = load(file_path).map { |row| row}
-    else
-      @items = []
+      @items = load(file_path).map { |item| Item.new(item)}
     end
   end
 

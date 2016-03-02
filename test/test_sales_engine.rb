@@ -1,6 +1,7 @@
 require 'minitest/autorun'
 require 'minitest/pride'
 require 'csv'
+require 'pry'
 require_relative '../lib/sales_engine'
 
 
@@ -18,9 +19,11 @@ class SalesEngineTest < Minitest::Test
 
     assert se.merchants
     assert se.items
+    binding.pry
   end
 
   def test_from_csv_method_when_used_on_an_instance_of_sales_engine
+    skip
     se = SalesEngine.from_csv({
           :items     => "./data/items.csv",
           :merchants => "./data/merchants.csv",

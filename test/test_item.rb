@@ -1,23 +1,23 @@
 require 'minitest/autorun'
 require 'minitest/pride'
 require 'csv'
+require 'time'
 require 'pry'
 require 'bigdecimal'
 require_relative '../lib/item'
 
 
 class ItemTest < Minitest::Test
-  attr_reader :time, :item
+  attr_reader :item
 
   def setup
-    @time = Time.now
     @item = Item.new({
                      id: 5,
                      name: "Pencil",
                      description: "You can use it to write things",
                      unit_price: BigDecimal.new(10.99,4),
-                     created_at: time,
-                     updated_at: time,
+                     created_at: "1995-03-19 10:02:43 UTC",
+                     updated_at: "2000-03-19 10:02:43 UTC",
                      merchant_id: 1222
                     })
 
@@ -39,12 +39,12 @@ class ItemTest < Minitest::Test
     assert_equal BigDecimal.new(10.99,4), item.unit_price
   end
 
-  def test_created_at_returns_time_item_was_created
-    assert_equal time, item.created_at
+  def test_created_at_returns_time_item_was_created_as_a_time_object
+    assert_equal Time.parse("1995-03-19 10:02:43 UTC"), item.created_at
   end
 
   def test_updated_at_returns_time_item_was_updated
-    assert_equal time, item.updated_at
+    assert_equal Time.parse("2000-03-19 10:02:43 UTC"), item.updated_at
   end
 
   def test_merchant_id_returns_the_merchant_of_item_id

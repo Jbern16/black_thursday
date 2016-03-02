@@ -1,11 +1,13 @@
 require 'csv'
 require 'pry'
+require 'time'
 require 'bigdecimal'
 
 class Item
+
   attr_reader :id, :name, :description,
-              :unit_price, :updated_at,
-              :created_at, :merchant_id
+              :unit_price, :merchant_id
+
 
   def initialize(data)
     @id = data[:id]
@@ -21,11 +23,18 @@ class Item
     unit_price.to_f
   end
 
-  def merchant
-    merchant = MerchantRepository.new("./data/merchants.csv")
-    merchant.merchants.find do |merchant|
+  def merchant(merchant_id)
+    @merchant.find do |merchant|
       merchant.id == merchant_id
     end
   end
 
+  def created_at
+    Time.parse(@created_at)
+
+  end
+
+  def updated_at
+    Time.parse(@updated_at)
+  end
 end

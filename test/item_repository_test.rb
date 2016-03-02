@@ -90,7 +90,7 @@ class ItemRepositoryTest < Minitest::Test
 
   def test_find_all_by_price_returns_all_matching_price_range_given
     items = ir.find_all_by_price_in_range(1000..1100)
-
+    ir.merchants
     assert_equal 2, items.length
     assert_equal "Pencil", items.first.name
     assert_equal "Eraser", items.last.name

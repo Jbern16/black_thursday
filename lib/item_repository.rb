@@ -6,13 +6,15 @@ require_relative 'item'
 
 class ItemRepository
   attr_accessor :items
+  attr_reader :merchants
+
   include CsvLoader
 
-  def initialize(file_path=nil)
+  def initialize(file_path=nil, merchants=nil)
     unless file_path.nil?
-      @items = load(file_path).map { |item| Item.new(item)}
-    else
-      @items = []
+      @items = load(file_path).map { |item| Item.new(item, merchants)}
+    end
+    @merchants = SalesEngine
   end
 
   def all

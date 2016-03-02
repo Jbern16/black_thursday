@@ -4,15 +4,15 @@ require 'csv'
 require 'pry'
 
 class MerchantRepository
-  attr_accessor :merchants
+  attr_accessor :merchants, :items
 
   include CsvLoader
 
-  def initialize(file_path=nil)
+  def initialize(file_path=nil, items=nil)
     unless file_path.nil?
-      @merchants = load(file_path).map { |merchant| Merchant.new(merchant)}
-    else
-      @merchants = []
+      @merchants = load(file_path).map { |merchant| Merchant.new(merchant)}#, items)}
+    end
+    @items = items
   end
 
   def all

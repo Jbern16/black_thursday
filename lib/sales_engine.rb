@@ -9,7 +9,16 @@ class SalesEngine
   def initialize(merchants, items)
     @merchants = merchants
     @items = items
+    # give_item_its_merchant
+    # give_merchant_its_items
   end
+
+  def give_item_its_merchant
+  end
+
+  # from_csv --> "factory method"
+  # method on the class designed to assist with the construction of
+  # new instances
 
   def self.from_csv(data)
     merchants = MerchantRepository.new(data[:merchants])
@@ -18,7 +27,7 @@ class SalesEngine
     give_merchant_its_items(merchants, items)
 
 
-    SalesEngine.new(merchants, items)
+    se = SalesEngine.new(merchants, items)
   end
 
   def self.give_item_its_merchant(merchants, items)
@@ -32,20 +41,4 @@ class SalesEngine
       merchant.items = items.find_all_by_merchant_id(merchant.id)
     end
   end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 end

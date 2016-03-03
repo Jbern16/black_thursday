@@ -39,6 +39,15 @@ class SalesAnalystTest < Minitest::Test
     updated_at: time,
     merchant_id: 5}),
 
+    Item.new({
+    id: 6,
+    name: "Stupid Expensive Pen",
+    description: "You can use it to write things like a cheap pen",
+    unit_price: BigDecimal("5000"),
+    created_at: time,
+    updated_at: time,
+    merchant_id: 5}),
+
    Item.new({
     id: 1,
     name: "Eraser",
@@ -50,9 +59,27 @@ class SalesAnalystTest < Minitest::Test
 
     Item.new({
      id: 1,
+     name: "Eraser",
+     description: "You can use it to erase things",
+     unit_price: BigDecimal("1100"),
+     created_at: time,
+     updated_at: time,
+     merchant_id: 5}),
+
+     Item.new({
+      id: 1,
+      name: "Eraser",
+      description: "You can use it to erase things",
+      unit_price: BigDecimal("1500"),
+      created_at: time,
+      updated_at: time,
+      merchant_id: 5}),
+
+    Item.new({
+     id: 1,
      name: "Tweesers",
      description: "You can use it to pluck things",
-     unit_price: BigDecimal("2000"),
+     unit_price: BigDecimal("1100"),
      created_at: time,
      updated_at: time,
      merchant_id: 7})]
@@ -90,12 +117,12 @@ class SalesAnalystTest < Minitest::Test
   def test_average_items_per_merchant_returns_avg
     sa = SalesAnalyst.new(se)
 
-    assert_equal 1.0, sa.average_items_per_merchant
+    assert_equal 2.0, sa.average_items_per_merchant
   end
 
   def test_average_items_per_merchant_standard_deviation_returns
     sa = SalesAnalyst.new(se)
-    assert_equal 1.58, sa.average_items_per_merchant_standard_deviation
+    assert_equal 3.24, sa.average_items_per_merchant_standard_deviation
   end
 
   def test_merchants_with_high_item_count_returns_array_of_merchants_up_one_from_standard_dev
@@ -105,7 +132,23 @@ class SalesAnalystTest < Minitest::Test
 
   def test_average_item_price_for_merchant_returns_avg_price
     sa = SalesAnalyst.new(se)
-    assert_equal BigDecimal(2000), sa.average_item_price_for_merchant(5)
+    assert_equal 2266.67, sa.average_item_price_for_merchant(5)
+  end
+
+  def test_standard_deviation_for_unit_price
+    sa = SalesAnalyst.new(se)
+    assert_equal 1372.35, sa.standard_deviation_for_unit_price
+  end
+
+  def test_golden_items_returns_items_with_unit_price_two_over_mean_unit_price
+    sa = SalesAnalyst.new(se)
+    assert_equal "Stupid Expensive Pen", sa.golden_items[0].name
+  end
+
+  def test_finding_average_average_price_per_merchant
+    sa = SalesAnalyst.new(se)
+    price = 1122
+    assert_equal price, sa.average_average_price_per_merchant.floor
   end
 
 end

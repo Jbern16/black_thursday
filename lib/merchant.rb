@@ -11,4 +11,12 @@ class Merchant
     @items = []
   end
 
+  def average_item_price
+    if items.any?
+      items.map(&:unit_price).reduce(0,:+) / items.length
+    else
+      0
+    end
+  end
+
 end

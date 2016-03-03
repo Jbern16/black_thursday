@@ -6,9 +6,12 @@ require_relative '../lib/merchant'
 
 class MerchantTest < Minitest::Test
   attr_reader :merchant
-  
+
   def setup
-    @merchant = Merchant.new({id: 5, name: "Turing School"})
+    @merchant = Merchant.new({id: 5,
+                              name: "Turing School",
+                              items: []
+                             })
   end
 
   def test_marchant_is_created_with_an_id
@@ -17,6 +20,11 @@ class MerchantTest < Minitest::Test
 
   def test_marchant_is_created_with_a_name
     assert_equal "Turing School", merchant.name
+  end
+
+  def test_merchant_has_items
+    merchant.items = ["pencil", "pen"]
+    assert_equal ["pencil", "pen"], merchant.items
   end
 
 end

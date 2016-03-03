@@ -13,10 +13,4 @@ class Merchant
     # @items_objects = items_objects.items
   end
 
-  #  def items
-  # #   items_objects.items.find do |merchant|
-  # #     merchant.id == id
-  # #   end
-  # # end
-
-end
+  end

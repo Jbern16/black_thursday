@@ -25,13 +25,6 @@ class Item
     sprintf('%.2f', unit_price_as_dollars)
   end
 
-  # def merchant
-  #   # binding.pry
-  #     @merchant_repo.merchants.find do |merchant|
-  #     merchant.id == merchant_id
-  #   end
-  # end
-
   def created_at
     Time.parse(@created_at)
   end

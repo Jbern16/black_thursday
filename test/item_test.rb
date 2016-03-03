@@ -18,7 +18,8 @@ class ItemTest < Minitest::Test
                      unit_price: BigDecimal.new("6000"),
                      created_at: "1995-03-19 10:02:43 UTC",
                      updated_at: "2000-03-19 10:02:43 UTC",
-                     merchant_id: 1222
+                     merchant_id: 1222,
+                     merchant: nil
                     })
 
   end
@@ -53,6 +54,12 @@ class ItemTest < Minitest::Test
 
   def test_unit_price_in_dollars_returns_price_of_item_as_float
     assert_equal "60.00", item.unit_price_to_dollars
+  end
+
+  def test_item_has_a_merchant
+    item.merchant = "Office Depot"
+
+    assert_equal "Office Depot", item.merchant
   end
 
 end

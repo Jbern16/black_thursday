@@ -5,11 +5,11 @@ require 'bigdecimal'
 
 class Item
 
-  attr_reader :id, :name, :description, :merchant_objects,
+  attr_reader :id, :name, :description,
               :unit_price, :merchant_id
+  attr_accessor :merchant_repo
 
-
-  def initialize(data, merchant_objects=nil)
+  def initialize(data)
     @id = data[:id]
     @name = data[:name]
     @description = data[:description]
@@ -17,9 +17,7 @@ class Item
     @created_at = data[:created_at]
     @updated_at = data[:updated_at]
     @merchant_id = data[:merchant_id]
-    unless merchant_objects.nil?
-      @merchant_objects = merchant_objects.merchants
-    end
+    # binding.pry
   end
 
   def unit_price_to_dollars
@@ -28,7 +26,8 @@ class Item
   end
 
   def merchant
-    merchant_objects.merchants.find do |merchant|
+    # binding.pry
+      @merchant_repo.merchants.find do |merchant|
       merchant.id == merchant_id
     end
   end

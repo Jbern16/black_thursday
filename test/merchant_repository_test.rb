@@ -1,6 +1,7 @@
 require 'minitest/autorun'
 require 'minitest/pride'
 require 'csv'
+require 'pry'
 require_relative '../lib/merchant_repository'
 require_relative '../lib/sales_engine'
 require_relative '../lib/merchant'

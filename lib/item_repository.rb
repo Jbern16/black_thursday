@@ -5,16 +5,15 @@ require_relative 'merchant_repository'
 require_relative 'item'
 
 class ItemRepository
-  attr_accessor :items
+  attr_accessor :items, :merchant_repo
   attr_reader :merchants
 
   include CsvLoader
 
-  def initialize(file_path=nil, merchants=nil)
+  def initialize(file_path=nil)
     unless file_path.nil?
-      @items = load(file_path).map { |item| Item.new(item, merchants)}
+      @items = load(file_path).map { |item| Item.new(item)}
     end
-    @merchants = SalesEngine
   end
 
   def all
@@ -23,6 +22,8 @@ class ItemRepository
 
   def find_by_id(item_id)
     items.find do |item|
+      # binding.pry
+      item.merchant_repo = merchant_repo
       item.id == item_id
     end
   end

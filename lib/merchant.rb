@@ -1,4 +1,3 @@
-require 'csv'
 require 'pry'
 
 class Merchant
@@ -10,7 +9,6 @@ class Merchant
     @id = data[:id]
     @name = data[:name]
     @items = []
-    # @items_objects = items_objects.items
   end
 
-  end
+end

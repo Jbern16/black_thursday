@@ -1,12 +1,8 @@
-require 'csv'
 require 'pry'
 require_relative 'csv_loader'
-require_relative 'merchant_repository'
-require_relative 'item'
 
 class ItemRepository
   attr_accessor :items
-  attr_reader :merchants
 
   include CsvLoader
 
@@ -22,8 +18,6 @@ class ItemRepository
 
   def find_by_id(item_id)
     items.find do |item|
-      # binding.pry
-      # item.merchant_repo = merchant_repo
       item.id == item_id
     end
   end

@@ -1,6 +1,5 @@
 require 'minitest/autorun'
 require 'minitest/pride'
-require 'csv'
 require 'time'
 require 'pry'
 require 'bigdecimal'

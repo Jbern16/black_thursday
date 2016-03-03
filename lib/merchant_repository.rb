@@ -1,15 +1,12 @@
 require_relative 'csv_loader'
-require_relative 'merchant'
-require 'csv'
 require 'pry'
 
 class MerchantRepository
-  attr_accessor :merchants, :items_repo
+  attr_accessor :merchants
 
   include CsvLoader
 
   def initialize(file_path=nil)
-
     unless file_path.nil?
       @merchants = load(file_path).map { |merchant| Merchant.new(merchant)}
     end

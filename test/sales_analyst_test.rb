@@ -3,29 +3,38 @@ require 'minitest/pride'
 require 'pry'
 require 'bigdecimal'
 require_relative '../lib/sales_analyst'
-
 require_relative '../lib/merchant'
 require_relative '../lib/merchant_repository'
 require_relative '../lib/item'
 
 
 class SalesAnalystTest < Minitest::Test
-  attr_reader :merchants, :items, :se
+  attr_reader :merchants, :items, :se, :mr
 
   def setup
     time = Time.now
 
-    @merchants =
-    [Merchant.new({id: 5, name: "Turing School"}),
-    Merchant.new({id: 7, name: "Tom School"}),
-    Merchant.new({id: 9, name: "CoolDecor"})]
+    @mr = MerchantRepository.new
+    @merchants = mr.merchants =
+                  [Merchant.new({id: 5, name: "Turing School"}),
+                  Merchant.new({id: 7, name: "Tom School"}),
+                  Merchant.new({id: 9, name: "CoolDecor"})]
 
-    @items =
+    @items = ItemRepository.new.items =
     [Item.new({
-    id: 5,
+    id: 4,
     name: "Pencil",
     description: "You can use it to write things",
     unit_price: BigDecimal("2500"),
+    created_at: time,
+    updated_at: time,
+    merchant_id: 5}),
+
+    Item.new({
+    id: 6,
+    name: "Pens",
+    description: "You can use it to write things",
+    unit_price: BigDecimal("2000"),
     created_at: time,
     updated_at: time,
     merchant_id: 5}),
@@ -48,7 +57,7 @@ class SalesAnalystTest < Minitest::Test
      updated_at: time,
      merchant_id: 7})]
 
-    @se = SalesEngine.new(merchants, items)
+    @se = SalesEngine.new(mr, items)
 
     se.items.map do |item|
       this = merchants.find do |merchant|
@@ -57,7 +66,7 @@ class SalesAnalystTest < Minitest::Test
       item.merchant = this
     end
 
-    se.merchants.map do |merchant|
+    se.merchants.all.map do |merchant|
       this = items.select do |item|
         item.merchant_id == merchant.id
       end
@@ -86,7 +95,17 @@ class SalesAnalystTest < Minitest::Test
 
   def test_average_items_per_merchant_standard_deviation_returns
     sa = SalesAnalyst.new(se)
-    assert_equal 1.0, sa.average_items_per_merchant_standard_deviation
+    assert_equal 1.58, sa.average_items_per_merchant_standard_deviation
+  end
+
+  def test_merchants_with_high_item_count_returns_array_of_merchants_up_one_from_standard_dev
+    sa = SalesAnalyst.new(se)
+    assert_equal "Turing School", sa.merchants_with_high_item_count[0].name
+  end
+
+  def test_average_item_price_for_merchant_returns_avg_price
+    sa = SalesAnalyst.new(se)
+    assert_equal BigDecimal(2000), sa.average_item_price_for_merchant(5)
   end
 
 end

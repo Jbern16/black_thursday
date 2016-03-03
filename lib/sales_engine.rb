@@ -17,6 +17,7 @@ class SalesEngine
     give_item_its_merchant(merchants , items)
     give_merchant_its_items(merchants, items)
 
+
     SalesEngine.new(merchants, items)
   end
 

@@ -15,15 +15,26 @@ class SalesEngine
   def self.from_csv(data)
     merchants = MerchantRepository.new(data[:merchants])
     items = ItemRepository.new(data[:items])
-    inject_repo(merchants, items)
+    give_item_its_merchant(merchants , items)
+    give_merchant_its_items(merchants, items)
 
     SalesEngine.new(merchants, items)
   end
 
-  def self.inject_repo(merchants, items)
-    merchants.items_repo = items
-    items.merchant_repo = merchants
+  def self.give_item_its_merchant(merchants, items)
+    items.all.each do |item|
+      item.merchant = merchants.find_by_id(item.merchant_id)
+    end
   end
+
+  def self.give_merchant_its_items(merchants, items)
+    merchants.all.each do |merchant|
+      merchant.items = items.find_all_by_merchant_id(merchant.id)
+    end
+  end
+
+
+
 
 
 

@@ -7,7 +7,7 @@ class Item
 
   attr_reader :id, :name, :description,
               :unit_price, :merchant_id
-  attr_accessor :merchant_repo
+  attr_accessor :merchant
 
   def initialize(data)
     @id = data[:id]
@@ -17,7 +17,7 @@ class Item
     @created_at = data[:created_at]
     @updated_at = data[:updated_at]
     @merchant_id = data[:merchant_id]
-    # binding.pry
+    @merchant = nil
   end
 
   def unit_price_to_dollars
@@ -25,12 +25,12 @@ class Item
     sprintf('%.2f', unit_price_as_dollars)
   end
 
-  def merchant
-    # binding.pry
-      @merchant_repo.merchants.find do |merchant|
-      merchant.id == merchant_id
-    end
-  end
+  # def merchant
+  #   # binding.pry
+  #     @merchant_repo.merchants.find do |merchant|
+  #     merchant.id == merchant_id
+  #   end
+  # end
 
   def created_at
     Time.parse(@created_at)

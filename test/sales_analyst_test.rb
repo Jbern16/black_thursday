@@ -9,7 +9,7 @@ require_relative '../lib/item'
 
 
 class SalesAnalystTest < Minitest::Test
-  attr_reader :merchants, :items, :se, :mr
+  attr_reader :merchants, :items, :se, :mr, :ir
 
   def setup
     time = Time.now
@@ -20,73 +20,75 @@ class SalesAnalystTest < Minitest::Test
                   Merchant.new({id: 7, name: "Tom School"}),
                   Merchant.new({id: 9, name: "CoolDecor"})]
 
-    @items = ItemRepository.new.items =
-    [Item.new({
-    id: 4,
-    name: "Pencil",
-    description: "You can use it to write things",
-    unit_price: BigDecimal("2500"),
-    created_at: time,
-    updated_at: time,
-    merchant_id: 5}),
 
-    Item.new({
-    id: 6,
-    name: "Pens",
-    description: "You can use it to write things",
-    unit_price: BigDecimal("2000"),
-    created_at: time,
-    updated_at: time,
-    merchant_id: 5}),
+    @ir = ItemRepository.new
+    @items = ir.items =
+                  [Item.new({
+                  id: 4,
+                  name: "Pencil",
+                  description: "You can use it to write things",
+                  unit_price: BigDecimal("2500"),
+                  created_at: time,
+                  updated_at: time,
+                  merchant_id: 5}),
 
-    Item.new({
-    id: 6,
-    name: "Stupid Expensive Pen",
-    description: "You can use it to write things like a cheap pen",
-    unit_price: BigDecimal("5000"),
-    created_at: time,
-    updated_at: time,
-    merchant_id: 5}),
+                  Item.new({
+                  id: 6,
+                  name: "Pens",
+                  description: "You can use it to write things",
+                  unit_price: BigDecimal("2000"),
+                  created_at: time,
+                  updated_at: time,
+                  merchant_id: 5}),
 
-   Item.new({
-    id: 1,
-    name: "Eraser",
-    description: "You can use it to erase things",
-    unit_price: BigDecimal("1500"),
-    created_at: time,
-    updated_at: time,
-    merchant_id: 5}),
+                  Item.new({
+                  id: 6,
+                  name: "Stupid Expensive Pen",
+                  description: "You can use it to write things like a cheap pen",
+                  unit_price: BigDecimal("5000"),
+                  created_at: time,
+                  updated_at: time,
+                  merchant_id: 5}),
 
-    Item.new({
-     id: 1,
-     name: "Eraser",
-     description: "You can use it to erase things",
-     unit_price: BigDecimal("1100"),
-     created_at: time,
-     updated_at: time,
-     merchant_id: 5}),
+                 Item.new({
+                  id: 1,
+                  name: "Eraser",
+                  description: "You can use it to erase things",
+                  unit_price: BigDecimal("1500"),
+                  created_at: time,
+                  updated_at: time,
+                  merchant_id: 5}),
 
-     Item.new({
-      id: 1,
-      name: "Eraser",
-      description: "You can use it to erase things",
-      unit_price: BigDecimal("1500"),
-      created_at: time,
-      updated_at: time,
-      merchant_id: 5}),
+                  Item.new({
+                   id: 1,
+                   name: "Eraser",
+                   description: "You can use it to erase things",
+                   unit_price: BigDecimal("1100"),
+                   created_at: time,
+                   updated_at: time,
+                   merchant_id: 5}),
 
-    Item.new({
-     id: 1,
-     name: "Tweesers",
-     description: "You can use it to pluck things",
-     unit_price: BigDecimal("1100"),
-     created_at: time,
-     updated_at: time,
-     merchant_id: 7})]
+                   Item.new({
+                    id: 1,
+                    name: "Eraser",
+                    description: "You can use it to erase things",
+                    unit_price: BigDecimal("1500"),
+                    created_at: time,
+                    updated_at: time,
+                    merchant_id: 5}),
 
-    @se = SalesEngine.new(mr, items)
+                  Item.new({
+                   id: 1,
+                   name: "Tweesers",
+                   description: "You can use it to pluck things",
+                   unit_price: BigDecimal("1100"),
+                   created_at: time,
+                   updated_at: time,
+                   merchant_id: 7})]
 
-    se.items.map do |item|
+    @se = SalesEngine.new(mr, ir)
+
+    se.items.all.map do |item|
       this = merchants.find do |merchant|
         merchant.id == item.merchant_id
       end

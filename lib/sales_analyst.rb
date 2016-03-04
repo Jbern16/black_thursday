@@ -14,7 +14,7 @@ class SalesAnalyst
   end
 
   def average_items_per_merchant
-    (items.all.length / merchants.all.length).to_f
+    (items.all.length.to_f / merchants.all.length.to_f).round(2)
   end
 
   def average_items_per_merchant_standard_deviation
@@ -37,7 +37,8 @@ class SalesAnalyst
     prices = merchants.find_by_id(merchant_id).items.map do |item|
       item.unit_price
     end
-    (average_unit_price = prices.reduce(:+) / prices.length).round(2).to_f
+    mean = (average_unit_price = prices.reduce(:+) / prices.length).round(2)
+    BigDecimal.new(mean)
   end
 
   def items_average_unit_price
@@ -58,7 +59,8 @@ class SalesAnalyst
   end
 
   def average_average_price_per_merchant
-    merchants.all.map(&:average_item_price).reduce(0,:+) / merchants.all.count
+    mean = (merchants.all.map(&:average_item_price).reduce(0,:+) / merchants.all.count)
+    mean.round(2)
   end
 
 end

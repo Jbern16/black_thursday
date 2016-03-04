@@ -1,3 +1,5 @@
+require 'csv'
+
 module CsvLoader
 
   def load(file_path)

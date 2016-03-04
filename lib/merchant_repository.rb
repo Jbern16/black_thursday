@@ -1,7 +1,6 @@
 require_relative 'csv_loader'
-require_relative 'merchant'
-require 'csv'
 require 'pry'
+require_relative 'merchant'
 
 class MerchantRepository
   attr_accessor :merchants
@@ -11,8 +10,6 @@ class MerchantRepository
   def initialize(file_path=nil)
     unless file_path.nil?
       @merchants = load(file_path).map { |merchant| Merchant.new(merchant)}
-    else
-      @merchants = []
     end
   end
 
@@ -22,7 +19,7 @@ class MerchantRepository
 
   def find_by_id(merchant_id)
     merchants.find do |merchant|
-      merchant.id == merchant_id
+      merchant_id == merchant.id
     end
   end
 
@@ -36,6 +33,10 @@ class MerchantRepository
     merchants.select do |merchant|
       merchant.name.downcase.include?(name_fragment.downcase)
     end
+  end
+
+  def inspect
+    "#<#{self.class} #{@merchants.size} rows>"
   end
 
 end

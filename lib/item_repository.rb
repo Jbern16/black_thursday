@@ -1,18 +1,15 @@
-require 'csv'
 require 'pry'
 require_relative 'csv_loader'
-require_relative 'merchant_repository'
 require_relative 'item'
 
 class ItemRepository
   attr_accessor :items
+
   include CsvLoader
 
   def initialize(file_path=nil)
     unless file_path.nil?
-      @items = load(file_path).map { |row| row}
-    else
-      @items = []
+      @items = load(file_path).map { |item| Item.new(item)}
     end
   end
 
@@ -40,13 +37,13 @@ class ItemRepository
 
   def find_all_by_price(price)
     items.select do |item|
-      item.unit_price == price
+      price == item.unit_price.to_f
     end
   end
 
   def find_all_by_price_in_range(price_range)
     items.select do |item|
-      item.unit_price.to_i >= price_range.to_a.first && item.unit_price.to_i <= price_range.to_a.last
+       price_range === (item.unit_price.to_f)
     end
   end
 
@@ -54,6 +51,10 @@ class ItemRepository
     items.select do |item|
       item.merchant_id == merchant_id
     end
+  end
+
+  def inspect
+    "#<#{self.class} #{@merchants.size} rows>"
   end
 
 end

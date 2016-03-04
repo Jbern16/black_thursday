@@ -1,5 +1,6 @@
 require_relative 'csv_loader'
 require 'pry'
+require_relative 'merchant'
 
 class MerchantRepository
   attr_accessor :merchants
@@ -18,7 +19,7 @@ class MerchantRepository
 
   def find_by_id(merchant_id)
     merchants.find do |merchant|
-      merchant.id == merchant_id
+      merchant_id == merchant.id
     end
   end
 
@@ -32,6 +33,10 @@ class MerchantRepository
     merchants.select do |merchant|
       merchant.name.downcase.include?(name_fragment.downcase)
     end
+  end
+
+  def inspect
+    "#<#{self.class} #{@merchants.size} rows>"
   end
 
 end

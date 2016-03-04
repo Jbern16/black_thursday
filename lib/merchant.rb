@@ -6,7 +6,7 @@ class Merchant
   attr_accessor :items
 
   def initialize(data)
-    @id = data[:id]
+    @id = data[:id].to_i
     @name = data[:name]
     @items = []
   end

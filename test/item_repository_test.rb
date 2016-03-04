@@ -1,6 +1,7 @@
 require 'minitest/autorun'
 require 'minitest/pride'
 require 'pry'
+require 'bigdecimal'
 require_relative '../lib/item_repository'
 require_relative '../lib/item'
 
@@ -16,7 +17,7 @@ class ItemRepositoryTest < Minitest::Test
                      id: 5,
                      name: "Pencil",
                      description: "You can use it to write things",
-                     unit_price: 1000,
+                     unit_price: BigDecimal.new(1000),
                      created_at: time,
                      updated_at: time,
                      merchant_id: 1222
@@ -82,9 +83,9 @@ class ItemRepositoryTest < Minitest::Test
   end
 
   def test_find_all_by_price_returns_all_matching_price_given
-    items = ir.find_all_by_price(1000)
+    items = ir.find_all_by_price(BigDecimal.new(1000))
 
-    assert_equal "Pencil", items.first.name
+    assert_equal 1, items.length
   end
 
   def test_find_all_by_price_returns_all_matching_price_range_given

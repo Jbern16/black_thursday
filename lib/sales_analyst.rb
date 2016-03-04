@@ -3,6 +3,7 @@ require_relative 'merchant_repository'
 require_relative 'standard_deviator'
 
 
+
 class SalesAnalyst
   attr_reader :items, :merchants, :sales_engine
 

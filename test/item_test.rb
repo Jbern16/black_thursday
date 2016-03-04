@@ -36,7 +36,7 @@ class ItemTest < Minitest::Test
   end
 
   def test_unit_price_returns_items_price
-    assert_equal BigDecimal.new("6000"), item.unit_price
+    assert_equal BigDecimal.new(60), item.unit_price
   end
 
   def test_created_at_returns_time_item_was_created_as_a_time_object

@@ -83,13 +83,16 @@ class ItemRepositoryTest < Minitest::Test
   end
 
   def test_find_all_by_price_returns_all_matching_price_given
-    items = ir.find_all_by_price(BigDecimal.new(1000))
+    price = (BigDecimal.new(10))
+    items = ir.find_all_by_price(price)
+
+
 
     assert_equal 1, items.length
   end
 
   def test_find_all_by_price_returns_all_matching_price_range_given
-    items = ir.find_all_by_price_in_range(1000..1100)
+    items = ir.find_all_by_price_in_range(10.0..11.0)
 
     assert_equal 2, items.length
     assert_equal "Pencil", items.first.name

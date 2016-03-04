@@ -25,10 +25,10 @@ class SalesEngineTest < Minitest::Test
           :merchants => "./data/merchants.csv",
         })
 
-    merchant = se.merchants.find_by_id("12334105")
+    merchant = se.merchants.find_by_id(12334105)
     assert_equal "Vogue Paris Original Givenchy 2307", merchant.items[0].name
 
-    item = se.items.find_by_id("263395237")
+    item = se.items.find_by_id(263395237)
     assert_equal "jejum", item.merchant.name
   end
 

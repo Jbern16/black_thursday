@@ -2,14 +2,17 @@ require 'minitest/autorun'
 require 'minitest/pride'
 require 'pry'
 require 'bigdecimal'
+require 'time'
 require_relative '../lib/sales_analyst'
 require_relative '../lib/merchant'
 require_relative '../lib/merchant_repository'
 require_relative '../lib/item'
+require_relative '../lib/invoice'
+require_relative '../lib/invoice_repository'
 
 
 class SalesAnalystTest < Minitest::Test
-  attr_reader :merchants, :items, :se, :mr, :ir
+  attr_reader :merchants, :items, :se, :mr, :ir, :invoice_repo, :invoices
 
   def setup
     time = Time.now
@@ -86,7 +89,37 @@ class SalesAnalystTest < Minitest::Test
                    updated_at: time,
                    merchant_id: 7})]
 
-    @se = SalesEngine.new(mr, ir)
+    @invoice_repo = InvoiceRepository.new
+    @invoices = invoice_repo.invoices =
+                    [Invoice.new({
+                     id: 5,
+                     unit_price: BigDecimal.new(1000),
+                     created_at: "1995-03-19 10:02:43 UTC",
+                     updated_at:  "1995-03-30 10:02:43 UTC",
+                     customer_id: 1555,
+                     merchant_id: 7,
+                     status: "pending"
+                    }),
+                    Invoice.new({
+                     id: 1,
+                     unit_price: BigDecimal.new(1000),
+                     created_at: "1995-03-20 10:02:43 UTC",
+                     updated_at:  "1995-03-28 10:02:43 UTC",
+                     customer_id: 1555,
+                     merchant_id: 7,
+                     status: "shipped"
+                     }),
+                     Invoice.new({
+                      id: 3,
+                      unit_price: BigDecimal.new(1000),
+                      created_at: "1995-03-18 10:02:43 UTC",
+                      updated_at: "1995-03-25 10:02:43 UTC",
+                      customer_id: 1555,
+                      merchant_id: 5,
+                      status: "shipped"})]
+
+
+    @se = SalesEngine.new(mr, ir, invoice_repo)
 
     se.items.all.map do |item|
       this = merchants.find do |merchant|
@@ -100,6 +133,20 @@ class SalesAnalystTest < Minitest::Test
         item.merchant_id == merchant.id
       end
       merchant.items = this
+    end
+
+    se.invoices.all.map do |invoice|
+      this = merchants.find do |merchant|
+        invoice.merchant_id == merchant.id
+      end
+      invoice.merchant = this
+    end
+
+    se.merchants.all.map do |merchant|
+      this = invoices.select do |invoice|
+        merchant.id == invoice.merchant_id
+      end
+      merchant.invoices = this
     end
 
   end
@@ -153,4 +200,33 @@ class SalesAnalystTest < Minitest::Test
     assert_equal price, sa.average_average_price_per_merchant.floor
   end
 
+  def test_average_invoices_per_merchant
+    sa = SalesAnalyst.new(se)
+    assert_equal 1.0, sa.average_invoices_per_merchant
+  end
+
+  def test_average_invoices_per_merchant_standard_deviation
+    sa = SalesAnalyst.new(se)
+    assert_equal 1, sa.average_invoices_per_merchant_standard_deviation
+  end
+
+  def test_bottom_merchants_by_invoice_count
+    sa = SalesAnalyst.new(se)
+    assert_equal [], sa.bottom_merchants_by_invoice_count
+  end
+
+  def test_top_merchants_by_invoice_count_returns_array_of_merchants_with_most_invoices
+    sa = SalesAnalyst.new(se)
+    assert_equal [], sa.top_merchants_by_invoice_count
+  end
+
+  def test_top_days_by_invoice_count_returns_array_with_days_containing_most_invoices
+    sa = SalesAnalyst.new(se)
+    assert_equal [], sa.top_days_by_invoice_count
+  end
+
+  def test_invoice_status_returns_percentage
+    sa = SalesAnalyst.new(se)
+    assert_equal 33.33, sa.invoice_status(:pending)
+  end
 end

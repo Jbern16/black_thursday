@@ -6,23 +6,26 @@ require_relative '../lib/sales_engine'
 class SalesEngineTest < Minitest::Test
 
   def test_if_sales_engine_exists
-    assert SalesEngine.new("green", "one")
+    assert SalesEngine.new("green", "one", "in")
   end
 
   def test_from_csv_creates_item_and_merchant_repository
     se = SalesEngine.from_csv({
       :items     => "./data/items.csv",
-      :merchants => "./data/merchants.csv"
+      :merchants => "./data/merchants.csv",
+      :invoices => "./data/invoices.csv"
       })
 
     assert se.merchants
     assert se.items
+    assert se.invoices
   end
 
   def test_from_csv_method_when_used_on_an_instance_of_sales_engine
     se = SalesEngine.from_csv({
           :items     => "./data/items.csv",
-          :merchants => "./data/merchants.csv",
+          :merchants => "./data/merchants.csv"
+          # :invoices
         })
 
     merchant = se.merchants.find_by_id(12334105)
@@ -32,4 +35,17 @@ class SalesEngineTest < Minitest::Test
     assert_equal "jejum", item.merchant.name
   end
 
+  def test_from
+    se = SalesEngine.from_csv({
+      :items => "./data/items.csv",
+      :merchants => "./data/merchants.csv",
+      :invoices => "./data/invoices.csv"
+        })
+
+        merchant = se.merchants.find_by_id(12334105)
+        merchant.invoices
+
+        invoice = se.invoices.find_by_id(20)
+        invoice.merchant
+  end
 end

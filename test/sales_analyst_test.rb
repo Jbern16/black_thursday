@@ -2,6 +2,7 @@ require 'minitest/autorun'
 require 'minitest/pride'
 require 'pry'
 require 'bigdecimal'
+require 'time'
 require_relative '../lib/sales_analyst'
 require_relative '../lib/merchant'
 require_relative '../lib/merchant_repository'
@@ -93,8 +94,8 @@ class SalesAnalystTest < Minitest::Test
                     [Invoice.new({
                      id: 5,
                      unit_price: BigDecimal.new(1000),
-                     created_at: Time.parse("1995-03-19 10:02:43 UTC"),
-                     updated_at: time,
+                     created_at: "1995-03-19 10:02:43 UTC",
+                     updated_at:  "1995-03-30 10:02:43 UTC",
                      customer_id: 1555,
                      merchant_id: 7,
                      status: "pending"
@@ -102,8 +103,8 @@ class SalesAnalystTest < Minitest::Test
                     Invoice.new({
                      id: 1,
                      unit_price: BigDecimal.new(1000),
-                     created_at: Time.parse("1995-03-20 10:02:43 UTC"),
-                     updated_at: time,
+                     created_at: "1995-03-20 10:02:43 UTC",
+                     updated_at:  "1995-03-28 10:02:43 UTC",
                      customer_id: 1555,
                      merchant_id: 7,
                      status: "shipped"
@@ -111,8 +112,8 @@ class SalesAnalystTest < Minitest::Test
                      Invoice.new({
                       id: 3,
                       unit_price: BigDecimal.new(1000),
-                      created_at: Time.parse("1995-03-18 10:02:43 UTC"),
-                      updated_at: time,
+                      created_at: "1995-03-18 10:02:43 UTC",
+                      updated_at: "1995-03-25 10:02:43 UTC",
                       customer_id: 1555,
                       merchant_id: 5,
                       status: "shipped"})]
@@ -226,6 +227,6 @@ class SalesAnalystTest < Minitest::Test
 
   def test_invoice_status_returns_percentage
     sa = SalesAnalyst.new(se)
-    assert_equal 33.0, sa.invoice_status(:pending)
+    assert_equal 33.33, sa.invoice_status(:pending)
   end
 end

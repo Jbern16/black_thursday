@@ -10,13 +10,13 @@ class InvoiceRepositoryTest < Minitest::Test
       attr_reader :invoices, :invoice_repo
 
  def setup
-   time = Time.now
+
    @invoice_repo = InvoiceRepository.new
    @invoices = invoice_repo.invoices = [Invoice.new({
                     id: 5,
                     unit_price: BigDecimal.new(1000),
-                    created_at: time,
-                    updated_at: time,
+                    created_at:  "1995-03-18 10:02:43 UTC",
+                    updated_at:  "1995-03-23 10:02:43 UTC",
                     customer_id: 1555,
                     merchant_id: 1222,
                     status: "pending"
@@ -24,8 +24,8 @@ class InvoiceRepositoryTest < Minitest::Test
                    Invoice.new({
                     id: 1,
                     unit_price: BigDecimal.new(1000),
-                    created_at: time,
-                    updated_at: time,
+                    created_at:  "1995-03-19 10:02:43 UTC",
+                    updated_at:  "1995-03-22 10:02:43 UTC",
                     customer_id: 1555,
                     merchant_id: 1222,
                     status: "shipped"
@@ -60,10 +60,6 @@ class InvoiceRepositoryTest < Minitest::Test
    assert_equal [], invoice_repo.find_all_by_merchant_id(1242)
  end
 
- # def test_find_all_by_customer_id_returns_empty_array_if_not_found
- #   assert_equal "{5=>2}", invoice_repo.day_of_week.to_s
- # end
-
 
  def test_find_all_by_merchant_id_finds_all_matching_invoices
    assert_equal 2, invoice_repo.find_all_by_merchant_id(1222).length
@@ -74,11 +70,11 @@ class InvoiceRepositoryTest < Minitest::Test
  end
 
  def test_find_all_by_status_finds_all_matching_invoices_by_status
-   assert_equal 1, invoice_repo.find_all_by_status("pending").length
+   assert_equal 1, invoice_repo.find_all_by_status(:pending).length
  end
 
  def test_find_all_by_status_returns_empty_array_if_not_found
-   assert_equal [], invoice_repo.find_all_by_status("returned")
+   assert_equal [], invoice_repo.find_all_by_status(:returned)
  end
 
 

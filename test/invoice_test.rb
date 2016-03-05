@@ -9,12 +9,12 @@ class InvoiceTest < Minitest::Test
   attr_reader :invoice, :data
 
   def setup
-    time = Time.now
+
     @data = {
       id: 12221,
       unit_price: 100,
-      created_at: time,
-      updated_at: time,
+      created_at: "1995-03-19 10:02:43 UTC",
+      updated_at: "1995-03-20 10:02:43 UTC",
       customer_id: 15,
       status: "pending",
       merchant_id: 10}

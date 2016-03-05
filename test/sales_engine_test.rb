@@ -24,7 +24,8 @@ class SalesEngineTest < Minitest::Test
   def test_from_csv_method_when_used_on_an_instance_of_sales_engine
     se = SalesEngine.from_csv({
           :items     => "./data/items.csv",
-          :merchants => "./data/merchants.csv",
+          :merchants => "./data/merchants.csv"
+          # :invoices
         })
 
     merchant = se.merchants.find_by_id(12334105)
@@ -34,4 +35,17 @@ class SalesEngineTest < Minitest::Test
     assert_equal "jejum", item.merchant.name
   end
 
+  def test_from
+    se = SalesEngine.from_csv({
+      :items => "./data/items.csv",
+      :merchants => "./data/merchants.csv",
+      :invoices => "./data/invoices.csv"
+        })
+
+        merchant = se.merchants.find_by_id(12334105)
+        merchant.invoices
+
+        invoice = se.invoices.find_by_id(20)
+        invoice.merchant
+  end
 end

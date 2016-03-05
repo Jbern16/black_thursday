@@ -4,13 +4,17 @@ require_relative 'standard_deviator'
 
 
 
+
 class SalesAnalyst
-  attr_reader :items, :merchants, :sales_engine
+  attr_reader :items, :merchants, :sales_engine, :invoices
+
+  DAYS_OF_WEEK = %w(Sunday Monday Tuesday Wednesday Thursday Friday Saturday)
 
   def initialize(sales_engine)
     @sales_engine = sales_engine
     @items = sales_engine.items
     @merchants = sales_engine.merchants
+    @invoices = sales_engine.invoices
   end
 
   def average_items_per_merchant
@@ -61,6 +65,55 @@ class SalesAnalyst
   def average_average_price_per_merchant
     mean = (merchants.all.map(&:average_item_price).reduce(0,:+) / merchants.all.count)
     mean.round(2)
+  end
+
+  def average_invoices_per_merchant
+    (merchants.all.length.to_f / invoices.all.length.to_f).round(2)
+  end
+
+  def average_invoices_per_merchant_standard_deviation
+    numbers_squared = merchants.all.map do |merchant|
+      ((merchant.invoices.length) - average_invoices_per_merchant) ** 2
+    end
+
+    StandardDeviator.square_root_of_sum_divided_by(numbers_squared)
+  end
+
+  def bottom_merchants_by_invoice_count
+    criteria = average_invoices_per_merchant +
+    average_invoices_per_merchant_standard_deviation * -2
+
+    merchants.all.select { |merchant| merchant.invoices.count < criteria}
+  end
+
+  def top_merchants_by_invoice_count
+    criteria = average_invoices_per_merchant +
+    average_invoices_per_merchant_standard_deviation * 2
+
+    merchants.all.select { |merchant| merchant.invoices.count > criteria}
+  end
+
+  def top_days_by_invoice_count
+    criteria = invoices.average_invoices_per_day +
+    invoices.standard_deviation_of_days
+
+    frequency = invoices.invoice_count_per_day_of_week.map do |day, count|
+       day if count > criteria
+    end
+
+    days_and_frequency = DAYS_OF_WEEK.zip(frequency)
+    days_and_frequency.select do |day, frequency|
+      frequency != nil
+    end
+  end
+
+  def invoice_status(status)
+    status_count = invoices.all.select do |invoice|
+      invoice.status == status
+    end.count
+
+    percent_decimal = status_count.to_f / invoices.all.count
+    percent_decimal.round(2) * 100
   end
 
 end

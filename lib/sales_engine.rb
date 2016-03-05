@@ -10,7 +10,6 @@ class SalesEngine
   def initialize(merchants, items, invoices=nil)
     @merchants = merchants
     @items = items
-
     @invoices = invoices
   end
 
@@ -18,7 +17,6 @@ class SalesEngine
     merchants = MerchantRepository.new(data[:merchants])
     items = ItemRepository.new(data[:items])
     invoices = InvoiceRepository.new(data[:invoices])
-
     inject_repos(merchants,items,invoices)
 
     SalesEngine.new(merchants, items, invoices)

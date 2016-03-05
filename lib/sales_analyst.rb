@@ -8,7 +8,7 @@ require_relative 'standard_deviator'
 class SalesAnalyst
   attr_reader :items, :merchants, :sales_engine, :invoices
 
-  DAYS_OF_WEEK = %w(Sunday Monday Tuesday Wednesday Thursday Friday Saturday)
+  # DAYS_OF_WEEK = %w(Sunday Monday Tuesday Wednesday Thursday Friday Saturday)
 
   def initialize(sales_engine)
     @sales_engine = sales_engine
@@ -68,7 +68,7 @@ class SalesAnalyst
   end
 
   def average_invoices_per_merchant
-    (merchants.all.length.to_f / invoices.all.length.to_f).round(2)
+     ((invoices.all.length.to_f) / (merchants.all.length.to_f)).round(2)
   end
 
   def average_invoices_per_merchant_standard_deviation
@@ -97,14 +97,9 @@ class SalesAnalyst
     criteria = invoices.average_invoices_per_day +
     invoices.standard_deviation_of_days
 
-    frequency = invoices.invoice_count_per_day_of_week.map do |day, count|
+    invoices.invoice_count_per_day_of_week.map do |day, count|
        day if count > criteria
-    end
-
-    days_and_frequency = DAYS_OF_WEEK.zip(frequency)
-    days_and_frequency.select do |day, frequency|
-      frequency != nil
-    end
+    end.compact
   end
 
   def invoice_status(status)
@@ -113,7 +108,6 @@ class SalesAnalyst
     end.count
 
     percent_decimal = status_count.to_f / invoices.all.count
-    percent_decimal.round(2) * 100
+    (percent_decimal * 100).round(2)
   end
-
 end

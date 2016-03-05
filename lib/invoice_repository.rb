@@ -16,9 +16,9 @@ class InvoiceRepository
     invoices
   end
 
-  def find_by_id(item_id)
+  def find_by_id(invoice_id)
     invoices.find do |invoice|
-      invoice.id == item_id.to_i
+      invoice.id.to_i == invoice_id.to_i
     end
   end
 
@@ -49,11 +49,10 @@ class InvoiceRepository
   end
 
   def invoice_count_per_day_of_week
-    count = invoices.reduce(Hash.new(0)) do |days, invoice|
-      days[invoice.created_at.wday] += 1
+    invoices.reduce(Hash.new(0)) do |days, invoice|
+      days[invoice.created_at.strftime("%A")] += 1
       days
     end
-    count
   end
 
   def standard_deviation_of_days

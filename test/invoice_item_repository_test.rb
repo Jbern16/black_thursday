@@ -34,7 +34,7 @@ class IvoiceItemRepositoryTest < Minitest::Test
                     })]
   end
 
-  def test_t
+  def test_to_csv
     ir = InvoiceItemRepository.new
     ir.from_csv("./data/invoice_items.csv")
     invoice = ir.find_by_id(6)

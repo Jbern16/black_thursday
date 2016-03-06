@@ -13,7 +13,6 @@ class InvoiceItemRepository
         InvoiceItem.new(invoice_item)
       end
     end
-    binding.pry
   end
 
   def all
@@ -37,12 +36,5 @@ class InvoiceItemRepository
       invoice_item.invoice_id == invoice_id
     end
   end
-
-  def something(invoice_id, item_id)
-    invoices = invoices.find_by_invoice_id(invoice_id)
-    items = items.find_by_item_id
-
-    invoices.items = []
-    
 
 end

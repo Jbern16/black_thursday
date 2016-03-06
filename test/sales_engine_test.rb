@@ -25,9 +25,8 @@ class SalesEngineTest < Minitest::Test
     assert se.invoice_items
     # assert se.transactions
     # assert se.customers
-
     invoice = se.invoices.find_by_id(18)
-    assert_equal [], invoice.items
+    assert_equal 7, invoice.items.length
   end
 
 #   def test_from_csv_method_when_used_on_an_instance_of_sales_engine

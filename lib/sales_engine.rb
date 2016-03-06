@@ -80,34 +80,23 @@ class SalesEngine
   def self.give_transaction_its_invoice(transactions, invoices)
     transactions.all.each do |transaction|
       transaction.invoice = invoices.find_all_by_invoice_id(transaction.invoice_id)
+    end
   end
 
-  def self.give_merchants_its_customers(merchants, customers)
-    merchants.all.each 
+  def self.give_invoice_its_items(invoice_items, invoices, items)
+    invoice_items.map do |invoice_item|
+      invoices.all.map do |invoice|
 
-  def invoice_item
-    invoice_items =  invoices_items.find_by
+        if invoice_item.invoice_id == invoice.id
+          invoice.items << items.find_by_id(invoice_item.item_id)
+          invoice.customer = 
 
-
-
-
-  # def self.give_invoice_its_items(invoice_items, invoices, items)
-  #   binding.pry
-  #   invoice_items.each do |invoice_item|
-  #     invoice_item.invoice = invoices.find_by_id(invoice_item.invoice_id)
-  #   end
-  #   invoice_items.each do |invoice_item|
-  #     invoice_item.invoice.items << items.find_by_id(invoice_item.item_id)
-  #   end
-
-    # invoice_items.each do |invoice_item|
-    #   invoice = invoices.find_by_id(invoice_item.invoice_id)
-    #   item = items.find_by_id(invoice_item.item_id)
-    #   invoice.items << item
-    #   pry
-    # end
-
-  # end
-
+          invoice.items.map do |item|
+            item.merchant = []
+          end
+        end
+      end
+    end
+  end
 
 end

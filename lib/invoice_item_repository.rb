@@ -7,7 +7,11 @@ class InvoiceItemRepository
 
   include CsvLoader
 
-  def from_csv(file_path=nil, items, invoices)
+  def initialize(file_path)
+    from_csv(file_path)
+  end
+
+  def from_csv(file_path=nil)
     unless file_path.nil?
       @invoice_items = load(file_path).map do |invoice_item|
         InvoiceItem.new(invoice_item)
@@ -35,6 +39,10 @@ class InvoiceItemRepository
     invoice_items.select do |invoice_item|
       invoice_item.invoice_id == invoice_id
     end
+  end
+
+  def inspect
+    "#<#{self.class} #{@merchants.size} rows>"
   end
 
 end

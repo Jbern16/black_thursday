@@ -39,4 +39,8 @@ class Item
     BigDecimal.new(@unit_price) / 100
   end
 
+  def inspect
+    "#<#{self.class}>"
+  end
+
 end

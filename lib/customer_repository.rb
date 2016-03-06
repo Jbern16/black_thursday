@@ -8,6 +8,11 @@ class CustomerRepository
 
   include CsvLoader
 
+  def initialize(file_path)
+    from_csv(file_path)
+  end
+
+
   def from_csv(file_path)
     unless file_path.nil?
       @customers = load(file_path).map do |customer|
@@ -26,6 +31,12 @@ class CustomerRepository
     end
   end
 
+  def find_all_by_id(id)
+    customers.select do |customer|
+      customer.id.to_i == customer_id.to_i
+    end
+  end
+
   def find_all_by_last_name(last_name)
     customers.select do |customer|
       customer.last_name == last_name
@@ -36,6 +47,10 @@ class CustomerRepository
     customers.select do |customer|
       customer.first_name == first_name
     end
+  end
+
+  def inspect
+    "#<#{self.class} #{@merchants.size} rows>"
   end
 
 end

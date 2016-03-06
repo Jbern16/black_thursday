@@ -26,6 +26,10 @@ class InvoiceItem
   end
 
 
+  def inspect
+    "#<#{self.class}>"
+  end
+
 
 
 

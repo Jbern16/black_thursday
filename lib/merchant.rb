@@ -3,13 +3,14 @@ require 'pry'
 class Merchant
   attr_reader :id,
               :name
-  attr_accessor :items, :invoices
+  attr_accessor :items, :invoices, :customers
 
   def initialize(data)
     @id = data[:id].to_i
     @name = data[:name]
     @items = []
     @invoices = []
+    @customers = []
   end
 
   def average_item_price
@@ -18,6 +19,10 @@ class Merchant
     else
       0
     end
+  end
+
+  def inspect
+    "#<#{self.class}>"
   end
 
 end

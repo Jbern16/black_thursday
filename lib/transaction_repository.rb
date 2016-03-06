@@ -5,6 +5,10 @@ class TransactionRepository
   attr_accessor :transactions
   include CsvLoader
 
+  def initialize(file_path)
+    from_csv(file_path)
+  end
+
   def from_csv(file_path)
     unless file_path.nil?
       @transactions = load(file_path).map do |transaction|
@@ -40,6 +44,10 @@ class TransactionRepository
     transactions.select do |transaction|
       transaction.result == result
     end
+  end
+
+  def inspect
+    "#<#{self.class} #{@merchants.size} rows>"
   end
 
 

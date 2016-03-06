@@ -32,14 +32,14 @@ class SalesEngine
     customers = CustomerRepository.new.from_csv(data[:customers])
 
 
-    inject_repos(merchants,items,invoices,invoice_items)
+    inject_repos(merchants,items,invoices,invoice_items, transactions)
 
     SalesEngine.new(merchants, items, invoices,
                     invoice_items, transactions,
                     customers)
   end
 
-  def self.inject_repos(merchants,items,invoices,invoice_items)
+  def self.inject_repos(merchants,items,invoices,invoice_items, transactions)
     give_item_its_merchant(merchants , items)
     give_merchant_its_items(merchants, items)
 
@@ -49,6 +49,7 @@ class SalesEngine
     end
 
     unless invoice_items.nil?
+      give_transaction_its_invoice(transactions, invoices)
       give_invoice_its_items(invoice_items, invoices, items)
     end
   end
@@ -78,8 +79,11 @@ class SalesEngine
   end
 
   def self.give_transaction_its_invoice(transactions, invoices)
-    transactions.all.each do |transaction|
-      transaction.invoice = invoices.find_all_by_invoice_id(transaction.invoice_id)
+    transactions.each do |transaction|
+      invoice = invoices.find_by_id(transaction.invoice_id)
+
+      transaction.invoice = invoice
+      invoice.transactions << transaction
     end
   end
 
@@ -89,8 +93,6 @@ class SalesEngine
 
         if invoice_item.invoice_id == invoice.id
           invoice.items << items.find_by_id(invoice_item.item_id)
-          invoice.customer = 
-
           invoice.items.map do |item|
             item.merchant = []
           end

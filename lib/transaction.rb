@@ -6,6 +6,8 @@ class Transaction
               :credit_card_expiration_date, :result,
               :created_at, :updated_at
 
+  attr_accessor :invoice
+
   def initialize(data)
     @id = data[:id].to_i
     @invoice_id = data[:invoice_id].to_i
@@ -14,5 +16,6 @@ class Transaction
     @result = data[:result]
     @created_at = Time.parse(data[:created_at])
     @updated_at = Time.parse(data[:updated_at])
+    @invoice = nil
   end
 end

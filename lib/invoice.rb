@@ -5,7 +5,7 @@ class Invoice
               :updated_at, :customer_id,
               :status, :merchant_id
 
-  attr_accessor :merchant
+  attr_accessor :merchant, :items
 
   def initialize(data)
     @id = data[:id].to_i
@@ -17,5 +17,6 @@ class Invoice
     @merchant_id = data[:merchant_id].to_i
 
     @merchant = nil
+    @items = []
   end
 end

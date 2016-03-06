@@ -23,6 +23,11 @@ class ItemRepository
     end
   end
 
+  # def find_all_by_id(item_id)
+  #   items.select do |item|
+  #     item.id == item_id
+  # end
+
   def find_by_name(name_of_item)
     items.find do |item|
       item.name.downcase == name_of_item.downcase

@@ -5,6 +5,8 @@ class InvoiceItem
               :quantity, :created_at,
               :updated_at, :unit_price
 
+  attr_accessor :invoice
+
   def initialize(data)
     @id = data[:id].to_i
     @item_id = data[:item_id].to_i
@@ -13,6 +15,7 @@ class InvoiceItem
     @created_at = Time.parse(data[:created_at])
     @updated_at = Time.parse(data[:updated_at])
     @unit_price = data[:unit_price]
+
   end
 
 

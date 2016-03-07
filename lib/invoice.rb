@@ -9,7 +9,6 @@ class Invoice
 
   def initialize(data)
     @id = data[:id].to_i
-    @unit_price = data[:unit_price]
     @created_at = Time.parse(data[:created_at])
     @updated_at = Time.parse(data[:updated_at])
     @customer_id = data[:customer_id].to_i
@@ -25,4 +24,26 @@ class Invoice
   def inspect
     "#<#{self.class}>"
   end
+
+  def is_paid_in_full?
+    transactions.any? do |transaction|
+      transaction.result == "success"
+    end
+  end
+
+  def total
+    binding.pry
+    status = transactions.all? do |transaction|
+      transaction.result == "success"
+    end
+
+    if status
+      return unit_price
+    else
+      item.unit_price.reduce(:+)
+    end
+  end
+
+
+
 end

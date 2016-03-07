@@ -9,75 +9,87 @@ class SalesEngineTest < Minitest::Test
 
   def setup
     @se = SalesEngine.from_csv({
-      :items     => "./data/items.csv",
-      :merchants => "./data/merchants.csv",
-      :invoices => "./data/invoices.csv",
-      :invoice_items => "./data/invoice_items.csv",
-      :transactions => "./data/transactions.csv",
-      :customers => "./data/customers.csv"
+      :items     => "./data/fake_items.csv",
+      :merchants => "./data/fake_merchants.csv",
+      :invoices => "./data/fake_invoices.csv",
+      :invoice_items => "./data/fake_invoice_items.csv",
+      :transactions => "./data/fake_transactions.csv",
+      :customers => "./data/fake_customer.csv"
       })
   end
 
-  def test_if_sales_engine_exists
-    skip
-    assert SalesEngine.new("green", "one", "in")
+  def test_from_csv_creates_merchants_repository
+    assert_equal MerchantRepository, se.merchants.class
   end
 
-  def test_from_csv_creates_repositories
-
-    assert se.merchants
-    assert se.items
-    assert se.invoices
-    assert se.invoice_items
-    assert se.transactions
-    assert se.customers
+  def test_from_csv_creates_items_repository
+    assert_equal ItemRepository, se.items.class
   end
 
-  def test_items_have_merchants_and_merchants_have_items
-    merchant = se.merchants.find_by_id(12334105)
-    assert_equal "Vogue Paris Original Givenchy 2307", merchant.items[0].name
-
-    item = se.items.find_by_id(263395237)
-    assert_equal "jejum", item.merchant.name
+  def test_from_csv_creates_invoices_repository
+    assert_equal InvoiceRepository, se.invoices.class
   end
 
-  def test_invoices_have_merchants
-    merchant = se.merchants.find_by_id(12334105)
-    merchant.invoices
-
-    invoice = se.invoices.find_by_id(20)
-    invoice.merchant
+  def test_from_csv_creates_invoice_items_repository
+    assert_equal InvoiceItemRepository, se.invoice_items.class
   end
 
-  def test_invoices_have_items
-    invoice = se.invoices.find_by_id(18)
+  def test_from_csv_creates_transactions_repository
+    assert_equal TransactionRepository, se.transactions.class
+  end
 
-    assert_equal 7, invoice.items.length
+  def test_from_csv_creates_customers_repository
+    assert_equal CustomerRepository, se.customers.class
+  end
+
+  def test_item_has_merchant
+    item = se.items.find_by_id(3)
+    assert_equal "merchant3", item.merchant.name
+  end
+
+  def test_merchant_has_items
+    merchant = se.merchants.find_by_id(1)
+    assert_equal "item1", merchant.items[0].name
+  end
+
+  def test_invoice_has_merchants
+    invoice = se.invoices.find_by_id(3)
+    assert_equal "merchant3", invoice.merchant.name
+  end
+
+  def test_merchant_has_invoices
+    merchant = se.merchants.find_by_id(5)
+    assert_equal 2, merchant.invoices.length
+  end
+
+  def test_invoice_has_items
+    invoice = se.invoices.find_by_id(1)
+    assert_equal 5, invoice.items.length
   end
 
   def test_invoice_has_transactions
-    invoice = se.invoices.find_by_id(18)
+    invoice = se.invoices.find_by_id(3)
     assert_equal 2, invoice.transactions.length
   end
 
-  def test_invoice_has_customers
-    invoice = se.invoices.find_by_id(18)
-    assert_equal 2, invoice.customers
+  def test_invoice_has_customer
+    invoice = se.invoices.find_by_id(2)
+    assert_equal "Cecelia", invoice.customer.first_name
   end
 
-  def transactions_has_its_invoices
-   transactions = se.transactions.find_all_by_id(40)
-   assert_equal [], transactions.invoice.length
+  def test_transaction_has_invoice
+   transactions = se.transactions.find_by_id(2)
+   assert_equal 2, transactions.invoice.id
   end
 
-  def merchant_has_customers
-    merchant = se.merchants.find_all_by_id(10)
-     assert_equal [], merchant.customers.length
+  def test_merchant_has_customers
+    merchant = se.merchants.find_by_id(4)
+    assert_equal 1, merchant.customers.length
   end
 
-  def customer_has_merchants
-    customer = se.customers.find_by_id(30)
-    assert_equal [], customer.merchants.length
+  def test_customer_has_merchants
+    customer = se.customers.find_by_id(5)
+    assert_equal 2, customer.merchants.length
   end
 
 end

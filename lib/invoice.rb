@@ -32,16 +32,6 @@ class Invoice
   end
 
   def total
-    binding.pry
-    status = transactions.all? do |transaction|
-      transaction.result == "success"
-    end
-
-    if status
-      return unit_price
-    else
-      item.unit_price.reduce(:+)
-    end
   end
 
 

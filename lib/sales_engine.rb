@@ -44,6 +44,7 @@ class SalesEngine
     give_transaction_its_invoice(transactions, invoices)
     give_invoice_its_items(invoice_items, invoices, items)
     give_invoice_its_customers(invoices, customers)
+    give_invoice_its_invoice_items(invoices, invoice_items)
     give_customer_its_invoices(invoices,customers)
     give_merchant_its_customers(merchants, customers, invoices)
     give_customer_its_merchant(merchants, customers, invoices)
@@ -119,6 +120,12 @@ class SalesEngine
       customer.merchants = customer.invoices.map do |invoice|
         merchants.find_by_id(invoice.merchant_id)
       end
+    end
+  end
+
+  def give_invoice_its_invoice_items(invoices, ivoice_items)
+    invoices.all.each do |invoice|
+      invoice.invoice_items = invoice_items.find_all_by_invoice_id(invoice.id)
     end
   end
 

@@ -17,6 +17,8 @@ class InvoiceItem
     @updated_at = Time.parse(data[:updated_at])
     @unit_price = data[:unit_price].to_i
 
+    @invoice = nil
+
   end
 
 
@@ -33,6 +35,9 @@ class InvoiceItem
   def inspect
     "#<#{self.class}>"
   end
+
+
+
 
 
 

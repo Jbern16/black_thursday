@@ -5,7 +5,7 @@ require_relative 'standard_deviator'
 class SalesAnalyst
   attr_reader :items, :merchants, :sales_engine, :invoices
 
-  # DAYS_OF_WEEK = %w(Sunday Monday Tuesday Wednesday Thursday Friday Saturday)
+
 
   def initialize(sales_engine)
     @sales_engine = sales_engine
@@ -107,4 +107,5 @@ class SalesAnalyst
     percent_decimal = status_count.to_f / invoices.all.count
     (percent_decimal * 100).round(2)
   end
+
 end

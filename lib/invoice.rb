@@ -5,7 +5,7 @@ class Invoice
               :updated_at, :customer_id,
               :status, :merchant_id
 
-  attr_accessor :merchant, :items, :transactions, :customers
+  attr_accessor :merchant, :items, :transactions, :customer
 
   def initialize(data)
     @id = data[:id].to_i
@@ -19,7 +19,7 @@ class Invoice
     @merchant = nil
     @items = []
     @transactions = []
-    @customers = []
+    @customer = nil
   end
 
   def inspect

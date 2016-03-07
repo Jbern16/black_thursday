@@ -96,7 +96,7 @@ class SalesEngine
 
   def give_invoice_its_customers(invoices, customers)
     invoices.all.each do |invoice|
-      invoice.customers = customers.find_by_id(invoice.customer_id)
+      invoice.customer = customers.find_by_id(invoice.customer_id)
     end
   end
 

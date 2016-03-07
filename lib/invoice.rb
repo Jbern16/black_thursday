@@ -5,7 +5,7 @@ class Invoice
               :updated_at, :customer_id,
               :status, :merchant_id
 
-  attr_accessor :merchant, :items, :transactions, :customer
+  attr_accessor :merchant, :items, :transactions, :customer, :invoice_items
 
   def initialize(data)
     @id = data[:id].to_i
@@ -19,6 +19,7 @@ class Invoice
     @items = []
     @transactions = []
     @customer = nil
+    @invoice_items = []
   end
 
   def inspect
@@ -32,8 +33,11 @@ class Invoice
   end
 
   def total
+    if is_paid_in_full?
+      invoice_items.reduce(0) do |total, invoice_item|
+      total_price = invoice_item.quantity * invoice_item.unit_price
+      total += total_price
+      end
+    end
   end
-
-
-
 end

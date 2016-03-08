@@ -1,7 +1,9 @@
 require_relative 'sales_engine'
 require_relative 'merchant_repository'
 require_relative 'standard_deviator'
+require_relative 'sales_analyst_basic_operations'
 require 'time'
+
 
 class SalesAnalyst
   attr_reader :items, :merchants, :sales_engine, :invoices,
@@ -18,22 +20,21 @@ class SalesAnalyst
   end
 
   def average_items_per_merchant
-    (items.all.length.to_f / merchants.all.length.to_f).round(2)
+    BasicOperations.average_by_quantity(items,merchants)
   end
 
   def average_items_per_merchant_standard_deviation
     numbers_squared = merchants.all.map do |merchant|
       ((merchant.items.length) - average_items_per_merchant) ** 2
     end
-    StandardDeviator.square_root_of_sum_divided_by(numbers_squared)
+    StdDeviator.square_root_of_sum_divided_by(numbers_squared)
   end
 
   def merchants_with_high_item_count
-    one_standard_deviation = average_items_per_merchant +
-    average_items_per_merchant_standard_deviation
-
+    mean = average_items_per_merchant
+    stddev = average_items_per_merchant_standard_deviation
     merchants.all.select do |merchant|
-      merchant.items.length > one_standard_deviation
+      merchant.items.length > StdDeviator.deviations(1,mean,stddev)
     end
   end
 
@@ -54,12 +55,15 @@ class SalesAnalyst
     numbers_squared = items.all.map do |item|
       ((item.unit_price) - items_average_unit_price) ** 2
     end
-    StandardDeviator.square_root_of_sum_divided_by(numbers_squared)
+    StdDeviator.square_root_of_sum_divided_by(numbers_squared)
   end
 
   def golden_items
-    criteria = items_average_unit_price + standard_deviation_for_unit_price * 2
-    items.all.select { |item| item.unit_price > criteria}
+    mean = items_average_unit_price
+    stddev = standard_deviation_for_unit_price
+    criteria = StdDeviator.deviations(2, mean, stddev)
+
+    items.all.select {|item| item.unit_price > criteria}
   end
 
   def average_average_price_per_merchant
@@ -69,7 +73,7 @@ class SalesAnalyst
   end
 
   def average_invoices_per_merchant
-     ((invoices.all.length.to_f) / (merchants.all.length.to_f)).round(2)
+    BasicOperations.average_by_quantity(invoices, merchants)
   end
 
   def average_invoices_per_merchant_standard_deviation
@@ -77,26 +81,29 @@ class SalesAnalyst
       ((merchant.invoices.length) - average_invoices_per_merchant) ** 2
     end
 
-    StandardDeviator.square_root_of_sum_divided_by(numbers_squared)
+    StdDeviator.square_root_of_sum_divided_by(numbers_squared)
   end
 
   def bottom_merchants_by_invoice_count
-    criteria = average_invoices_per_merchant +
-    average_invoices_per_merchant_standard_deviation * -2
+    mean = average_invoices_per_merchant
+    stddev = average_invoices_per_merchant_standard_deviation
+    criteria = StdDeviator.deviations(-2,mean,stddev)
 
-    merchants.all.select { |merchant| merchant.invoices.count < criteria}
+    merchants.all.select {|merchant| merchant.invoices.count < criteria}
   end
 
   def top_merchants_by_invoice_count
-    criteria = average_invoices_per_merchant +
-    average_invoices_per_merchant_standard_deviation * 2
+    mean = average_invoices_per_merchant
+    stddev = average_invoices_per_merchant_standard_deviation
+    criteria = StdDeviator.deviations(2,mean,stddev)
 
-    merchants.all.select { |merchant| merchant.invoices.count > criteria}
+    merchants.all.select {|merchant| merchant.invoices.count > criteria}
   end
 
   def top_days_by_invoice_count
-    criteria = invoices.average_invoices_per_day +
-    invoices.standard_deviation_of_days
+    mean = invoices.average_invoices_per_day
+    stddev = invoices.standard_deviation_of_days
+    criteria = StdDeviator.deviations(1,mean,stddev)
 
     invoices.invoice_count_per_day_of_week.map do |day, count|
        day if count > criteria
@@ -154,7 +161,10 @@ class SalesAnalyst
   def most_sold_item_for_merchant(merchant_id)
     paid_invoice_items = find_invoice_items(merchant_id)
     item_id_and_count = item_id_with_count(paid_invoice_items)
-    selected_items = group(item_id_and_count).select { |x| x.class == String}
+    selected_items = group(item_id_and_count).select do |item|
+      item.is_a?(String)
+    end
+
     selected_items.map {|item_id| items.find_by_id(item_id.to_i)}
   end
 
@@ -173,13 +183,12 @@ class SalesAnalyst
   end
 
   def item_id_with_count(paid_invoice_items, multiplier=nil)
-    paid_invoice_items.reduce({}) do |item_hash, invoice_item|
+    paid_invoice_items.reduce(Hash.new(0)) do |items, invoice_item|
       id = invoice_item.item_id
-      unit_by_quantity = (invoice_item.quantity * invoice_item.unit_price)
-      item_hash[id.to_s] = 0 if item_hash[id].nil?
-      item_hash[id.to_s] +=  unit_by_quantity if multiplier
-      item_hash[id.to_s] += (invoice_item.quantity) if !multiplier
-      item_hash
+      items[id.to_s] = 0 if items[id].nil?
+      items[id.to_s] +=  invoice_item.total_price if multiplier
+      items[id.to_s] += invoice_item.quantity unless multiplier
+      items
     end
   end
 

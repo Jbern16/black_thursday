@@ -31,8 +31,7 @@ class Merchant
     invoices.map do |invoice|
       if invoice.transactions.any?(&:success)
         invoice.invoice_items.reduce(0) do |sum, invoice_item|
-          # binding.pry
-          sum += (invoice_item.unit_price * invoice_item.quantity)
+          sum += invoice_item.total_price
           sum
         end
       end

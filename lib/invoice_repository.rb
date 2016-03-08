@@ -40,10 +40,6 @@ class InvoiceRepository
     end
   end
 
-  def inspect
-    "#<#{self.class} #{merchants.size} rows>"
-  end
-
   def average_invoices_per_day
     (all.length / 7.0).round(2)
   end
@@ -61,7 +57,7 @@ class InvoiceRepository
     end
 
     numbers_squared[0] = numbers_squared.join.to_f.round(2)
-    StandardDeviator.square_root_of_sum_divided_by(numbers_squared)
+    StdDeviator.square_root_of_sum_divided_by(numbers_squared)
   end
 
   def date_finder(date)
@@ -70,4 +66,7 @@ class InvoiceRepository
     end
   end
 
+  def inspect
+    "#<#{self.class} #{merchants.size} rows>"
+  end
 end

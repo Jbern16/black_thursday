@@ -50,5 +50,4 @@ class TransactionRepository
     "#<#{self.class} #{@merchants.size} rows>"
   end
 
-
 end

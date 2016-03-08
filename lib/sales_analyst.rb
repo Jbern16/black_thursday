@@ -52,9 +52,8 @@ class SalesAnalyst
 
   def standard_deviation_for_unit_price
     numbers_squared = items.all.map do |item|
-      # binding.pry
-        ((item.unit_price) - items_average_unit_price) ** 2
-      end
+      ((item.unit_price) - items_average_unit_price) ** 2
+    end
     StandardDeviator.square_root_of_sum_divided_by(numbers_squared)
   end
 
@@ -114,18 +113,12 @@ class SalesAnalyst
   end
 
   def total_revenue_by_date(date)
-    invoices_with_date = invoices.date_finder(date)
-
-    invoices_with_date.reduce(0) do |sum, invoice_item|
-      sum += invoice_item.total
-      sum
-    end
+    invoice_totals = invoices.date_finder(date).map(&:total)
+    invoice_totals.reduce(:+)
   end
 
   def top_revenue_earners(number_of_merchants=20)
-    s = merchants.all.max_by(number_of_merchants) do |merchant|
-      merchant.revenue ? merchant.revenue : 0.0
-    end
+    merchants_ranked_by_revenue[0..number_of_merchants-1]
   end
 
   def revenue_by_merchant(merchant_id)
@@ -134,11 +127,7 @@ class SalesAnalyst
 
   def merchants_with_pending_invoices
     merchants.all.select do |merchant|
-      merchant.invoices.any? do |invoice|
-        invoice.transactions.all? do |transaction|
-          transaction.result == "failed"
-        end
-      end
+      merchant.any_failed_invoice_transactions?
     end
   end
 
@@ -163,9 +152,7 @@ class SalesAnalyst
   end
 
   def most_sold_item_for_merchant(merchant_id)
-    merchant = merchants.find_by_id(merchant_id)
-    paid_invoices = merchant.paid_merchant_invoices
-    paid_invoice_items = find_invoice_items(paid_invoices)
+    paid_invoice_items = find_invoice_items(merchant_id)
     item_id_and_count = item_id_with_count(paid_invoice_items)
     selected_items = group(item_id_and_count).select { |x| x.class == String}
     selected_items.map {|item_id| items.find_by_id(item_id.to_i)}
@@ -178,8 +165,9 @@ class SalesAnalyst
     end.max.flatten
   end
 
-  def find_invoice_items(paid_invoices)
-    paid_invoices.map do |paid_invoice|
+  def find_invoice_items(merchant_id)
+    merchant = merchants.find_by_id(merchant_id)
+    merchant.paid_merchant_invoices.map do |paid_invoice|
       invoice_items.find_all_by_invoice_id(paid_invoice.id)
     end.flatten
   end
@@ -187,20 +175,16 @@ class SalesAnalyst
   def item_id_with_count(paid_invoice_items, multiplier=nil)
     paid_invoice_items.reduce({}) do |item_hash, invoice_item|
       id = invoice_item.item_id
+      unit_by_quantity = (invoice_item.quantity * invoice_item.unit_price)
       item_hash[id.to_s] = 0 if item_hash[id].nil?
-      if multiplier
-        item_hash[id.to_s] += (invoice_item.quantity * invoice_item.unit_price)
-      else
-        item_hash[id.to_s] += (invoice_item.quantity)
-      end
+      item_hash[id.to_s] +=  unit_by_quantity if multiplier
+      item_hash[id.to_s] += (invoice_item.quantity) if !multiplier
       item_hash
     end
   end
 
   def best_item_for_merchant(merchant_id)
-    merchant = merchants.find_by_id(merchant_id)
-    paid_invoices = merchant.paid_merchant_invoices
-    paid_invoice_items = find_invoice_items(paid_invoices)
+    paid_invoice_items = find_invoice_items(merchant_id)
     item_id_and_value = item_id_with_count(paid_invoice_items, "multiplier")
     item_id = group(item_id_and_value)[1].to_i
     items.find_by_id(item_id)

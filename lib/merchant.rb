@@ -52,4 +52,10 @@ class Merchant
     end
   end
 
+  def any_failed_invoice_transactions?
+    invoices.any? do |invoice|
+      invoice.failed_transaction?
+    end
+  end
+
 end

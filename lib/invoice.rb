@@ -47,4 +47,10 @@ class Invoice
       sum
     end
   end
+
+  def failed_transaction?
+    transactions.all? do |transaction|
+      transaction.result == "failed"
+    end
+  end
 end

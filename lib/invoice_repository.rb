@@ -64,4 +64,10 @@ class InvoiceRepository
     StandardDeviator.square_root_of_sum_divided_by(numbers_squared)
   end
 
+  def date_finder(date)
+    invoices.select do |invoice|
+      invoice.created_at.strftime("%Y-%m-%d") == date.strftime("%Y-%m-%d")
+    end
+  end
+
 end

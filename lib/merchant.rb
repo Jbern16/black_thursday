@@ -1,8 +1,8 @@
 require 'pry'
 
 class Merchant
-  attr_reader :id,
-              :name
+  attr_reader :id, :name
+
   attr_accessor :items, :invoices, :customers, :created_at, :updated_at
 
   def initialize(data)

@@ -64,7 +64,8 @@ class SalesAnalyst
   end
 
   def average_average_price_per_merchant
-    mean = (merchants.all.map(&:average_item_price).reduce(0,:+) / merchants.all.count)
+    avg_price = merchants.all.map(&:average_item_price)
+    mean = (avg_price.reduce(0,:+) / merchants.all.count)
     mean.round(2)
   end
 
@@ -113,11 +114,9 @@ class SalesAnalyst
   end
 
   def total_revenue_by_date(date)
-    selected_invoice_items = invoices.all.select do |invoice_item|
-      date.strftime("%Y-%m-%d") == invoice_item.created_at.strftime("%Y-%m-%d")
-    end
+    invoices_with_date = invoices.date_finder(date)
 
-    selected_invoice_items.reduce(0) do |sum, invoice_item|
+    invoices_with_date.reduce(0) do |sum, invoice_item|
       sum += invoice_item.total
       sum
     end
@@ -168,7 +167,8 @@ class SalesAnalyst
     paid_invoices = merchant.paid_merchant_invoices
     paid_invoice_items = find_invoice_items(paid_invoices)
     item_id_and_count = item_id_with_count(paid_invoice_items)
-    group(item_id_and_count).select { |x| x.class == String}.map {|item_id| items.find_by_id(item_id.to_i)}
+    selected_items = group(item_id_and_count).select { |x| x.class == String}
+    selected_items.map {|item_id| items.find_by_id(item_id.to_i)}
   end
 
   def group(item_id_and_count)
@@ -186,11 +186,12 @@ class SalesAnalyst
 
   def item_id_with_count(paid_invoice_items, multiplier=nil)
     paid_invoice_items.reduce({}) do |item_hash, invoice_item|
-      item_hash[invoice_item.item_id.to_s] = 0 if item_hash[invoice_item.item_id].nil?
+      id = invoice_item.item_id
+      item_hash[id.to_s] = 0 if item_hash[id].nil?
       if multiplier
-        item_hash[invoice_item.item_id.to_s] += (invoice_item.quantity * invoice_item.unit_price)
+        item_hash[id.to_s] += (invoice_item.quantity * invoice_item.unit_price)
       else
-        item_hash[invoice_item.item_id.to_s] += (invoice_item.quantity)
+        item_hash[id.to_s] += (invoice_item.quantity)
       end
       item_hash
     end

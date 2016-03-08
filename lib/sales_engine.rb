@@ -21,7 +21,8 @@ class SalesEngine
     @transactions = TransactionRepository.new(transactions)
     @customers= CustomerRepository.new(customers)
 
-    sales_engine.inject_repos(@merchants,@items,@invoices,@invoice_items, @transactions, @customers)
+    sales_engine.inject_repos(@merchants,@items,@invoices,
+                              @invoice_items, @transactions, @customers)
   end
 
   def self.from_csv(data)
@@ -33,10 +34,13 @@ class SalesEngine
     customers = data[:customers]
 
 
-    SalesEngine.new(merchants, items, invoices, invoice_items, transactions, customers)
+    SalesEngine.new(merchants, items, invoices, invoice_items,
+                    transactions, customers)
   end
 
-  def inject_repos(merchants,items,invoices,invoice_items, transactions, customers)
+  def inject_repos(merchants,items,invoices,invoice_items,
+                   transactions, customers)
+
     give_item_its_merchant(merchants , items)
     give_merchant_its_items(merchants, items)
     give_invoice_its_merchant(merchants, invoices)

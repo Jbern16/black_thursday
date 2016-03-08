@@ -113,20 +113,19 @@ class SalesAnalyst
   end
 
   def total_revenue_by_date(date)
-    seleced_invoices_items = invoice_items.all.select do |invoice|
-      invoice.created_at == date
+    selected_invoice_items = invoices.all.select do |invoice_item|
+      date.strftime("%Y-%m-%d") == invoice_item.created_at.strftime("%Y-%m-%d")
     end
 
-    seleced_invoices_items.reduce(0) do |sum, invoice_item|
-      binding.pry
-      sum += invoice_item.unit_price
+    selected_invoice_items.reduce(0) do |sum, invoice_item|
+      sum += invoice_item.total
       sum
     end
   end
 
   def top_revenue_earners(number_of_merchants=20)
-    merchants.all.max_by(number_of_merchants) do |merchant|
-      merchant.revenue
+    s = merchants.all.max_by(number_of_merchants) do |merchant|
+      merchant.revenue ? merchant.revenue : 0.0
     end
   end
 
@@ -136,7 +135,11 @@ class SalesAnalyst
 
   def merchants_with_pending_invoices
     merchants.all.select do |merchant|
-      merchant.invoice_status(:pending)
+      merchant.invoices.any? do |invoice|
+        invoice.transactions.all? do |transaction|
+          transaction.result == "failed"
+        end
+      end
     end
   end
 
@@ -146,5 +149,60 @@ class SalesAnalyst
     end
   end
 
+  def merchants_with_only_one_item_registered_in_month(month)
+    merchants.all.select do |merchant|
+      if Time.parse(merchant.created_at).month == Date::MONTHNAMES.index(month)
+        merchant.items.length == 1
+      end
+    end
+  end
+
+  def merchants_ranked_by_revenue
+    merchants.all.sort_by do |merchant|
+      merchant.revenue ? -(merchant.revenue) : 0
+    end
+  end
+
+  def most_sold_item_for_merchant(merchant_id)
+    merchant = merchants.find_by_id(merchant_id)
+    paid_invoices = merchant.paid_merchant_invoices
+    paid_invoice_items = find_invoice_items(paid_invoices)
+    item_id_and_count = item_id_with_count(paid_invoice_items)
+    group(item_id_and_count).select { |x| x.class == String}.map {|item_id| items.find_by_id(item_id.to_i)}
+  end
+
+  def group(item_id_and_count)
+    item_id_and_count.group_by do |key, value|
+      key = key
+      value
+    end.max.flatten
+  end
+
+  def find_invoice_items(paid_invoices)
+    paid_invoices.map do |paid_invoice|
+      invoice_items.find_all_by_invoice_id(paid_invoice.id)
+    end.flatten
+  end
+
+  def item_id_with_count(paid_invoice_items, multiplier=nil)
+    paid_invoice_items.reduce({}) do |item_hash, invoice_item|
+      item_hash[invoice_item.item_id.to_s] = 0 if item_hash[invoice_item.item_id].nil?
+      if multiplier
+        item_hash[invoice_item.item_id.to_s] += (invoice_item.quantity * invoice_item.unit_price)
+      else
+        item_hash[invoice_item.item_id.to_s] += (invoice_item.quantity)
+      end
+      item_hash
+    end
+  end
+
+  def best_item_for_merchant(merchant_id)
+    merchant = merchants.find_by_id(merchant_id)
+    paid_invoices = merchant.paid_merchant_invoices
+    paid_invoice_items = find_invoice_items(paid_invoices)
+    item_id_and_value = item_id_with_count(paid_invoice_items, "multiplier")
+    item_id = group(item_id_and_value)[1].to_i
+    items.find_by_id(item_id)
+  end
 
 end

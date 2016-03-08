@@ -22,4 +22,8 @@ class Transaction
   def inspect
     "#<#{self.class}>"
   end
+
+  def success
+    result == "success"
+  end
 end

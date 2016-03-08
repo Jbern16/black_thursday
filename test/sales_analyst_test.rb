@@ -115,7 +115,7 @@ class SalesAnalystTest < Minitest::Test
   end
 
   def test_total_revenue_by_date_returns_revenue_for_date
-    assert_equal 15031.0, sa.total_revenue_by_date("2012/27/03").to_f
+    assert_equal 0, sa.total_revenue_by_date(Time.parse("2012/03/27")).to_f
   end
 
   def test_top_revenue_earners_returns_array_of_top_earners
@@ -123,14 +123,32 @@ class SalesAnalystTest < Minitest::Test
   end
 
   def test_revenue_by_merchant_returns_total_revenue
-    assert_equal 24.0, sa.revenue_by_merchant(2).to_f
+    assert_equal 13416.0, sa.revenue_by_merchant(2).to_f
   end
 
   def test_merchants_with_pending_status_returns_any_merchant_with_pending
-    assert_equal 3, sa.merchants_with_pending_invoices.length
+    assert_equal 0, sa.merchants_with_pending_invoices.length
   end
 
   def test_merchants_with_only_one_item
     assert_equal 5, sa.merchants_with_only_one_item.length
   end
+
+  def test_merchants_with_only_one_item_registered_in_month_returns_merchants
+    assert_equal 1, sa.merchants_with_only_one_item_registered_in_month("March").length
+  end
+
+  def test_merchants_ranked_by_revenues_first_merchant_is_highest
+    assert_equal 2, sa.merchants_ranked_by_revenue.first.id
+  end
+
+  def test_this
+    assert_equal 1, sa.most_sold_item_for_merchant(2).length
+  end
+
+  def test_this1
+    assert_equal 2, sa.best_item_for_merchant(2).id
+  end
+
+
 end

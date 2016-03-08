@@ -1,0 +1,6 @@
+id,name,description,unit_price,merchant_id,created_at,updated_at
+1,item1,descritpion, 2000,1,2016-01-11 13:30:40 UTC,1972-04-07 13:03:50 UTC
+2,item2,descritpion, 2400,2,2016-01-11 13:36:27 UTC,2007-12-19 12:52:03 UTC
+3,item3,descritpion, 2500,3,2016-01-11 13:55:04 UTC,2007-06-17 23:33:33 UTC
+4,item4,descritpion, 3000,4,2016-01-11 13:50:22 UTC,2008-11-07 03:26:02 UTC
+5,item5,descritpion, 3500,5,2016-01-11 13:50:22 UTC,2008-11-07 03:26:02 UTC

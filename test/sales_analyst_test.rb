@@ -12,192 +12,76 @@ require_relative '../lib/invoice_repository'
 
 
 class SalesAnalystTest < Minitest::Test
-  attr_reader :merchants, :items, :se, :mr, :ir, :invoice_repo, :invoices
+  attr_reader :se, :sa
 
   def setup
-    time = Time.now
+    @se = SalesEngine.from_csv({
+      :items     => "./data/fake_items.csv",
+      :merchants => "./data/fake_merchants.csv",
+      :invoices => "./data/fake_invoices.csv",
+      :invoice_items => "./data/fake_invoice_items.csv",
+      :transactions => "./data/fake_transactions.csv",
+      :customers => "./data/fake_customer.csv"
+    })
 
-    @mr = MerchantRepository.new
-    @merchants = mr.merchants =
-                  [Merchant.new({id: 5, name: "Turing School"}),
-                  Merchant.new({id: 7, name: "Tom School"}),
-                  Merchant.new({id: 9, name: "CoolDecor"})]
-
-
-    @ir = ItemRepository.new
-    @items = ir.items =
-                  [Item.new({
-                  id: 4,
-                  name: "Pencil",
-                  description: "You can use it to write things",
-                  unit_price: BigDecimal("2500"),
-                  created_at: time,
-                  updated_at: time,
-                  merchant_id: 5}),
-
-                  Item.new({
-                  id: 6,
-                  name: "Pens",
-                  description: "You can use it to write things",
-                  unit_price: BigDecimal("2000"),
-                  created_at: time,
-                  updated_at: time,
-                  merchant_id: 5}),
-
-                  Item.new({
-                  id: 6,
-                  name: "Stupid Expensive Pen",
-                  description: "You can use it to write things like a cheap pen",
-                  unit_price: BigDecimal("5000"),
-                  created_at: time,
-                  updated_at: time,
-                  merchant_id: 5}),
-
-                 Item.new({
-                  id: 1,
-                  name: "Eraser",
-                  description: "You can use it to erase things",
-                  unit_price: BigDecimal("1500"),
-                  created_at: time,
-                  updated_at: time,
-                  merchant_id: 5}),
-
-                  Item.new({
-                   id: 1,
-                   name: "Eraser",
-                   description: "You can use it to erase things",
-                   unit_price: BigDecimal("1100"),
-                   created_at: time,
-                   updated_at: time,
-                   merchant_id: 5}),
-
-                   Item.new({
-                    id: 1,
-                    name: "Eraser",
-                    description: "You can use it to erase things",
-                    unit_price: BigDecimal("1500"),
-                    created_at: time,
-                    updated_at: time,
-                    merchant_id: 5}),
-
-                  Item.new({
-                   id: 1,
-                   name: "Tweesers",
-                   description: "You can use it to pluck things",
-                   unit_price: BigDecimal("1100"),
-                   created_at: time,
-                   updated_at: time,
-                   merchant_id: 7})]
-
-    @invoice_repo = InvoiceRepository.new
-    @invoices = invoice_repo.invoices =
-                    [Invoice.new({
-                     id: 5,
-                     unit_price: BigDecimal.new(1000),
-                     created_at: "1995-03-19 10:02:43 UTC",
-                     updated_at:  "1995-03-30 10:02:43 UTC",
-                     customer_id: 1555,
-                     merchant_id: 7,
-                     status: "pending"
-                    }),
-                    Invoice.new({
-                     id: 1,
-                     unit_price: BigDecimal.new(1000),
-                     created_at: "1995-03-20 10:02:43 UTC",
-                     updated_at:  "1995-03-28 10:02:43 UTC",
-                     customer_id: 1555,
-                     merchant_id: 7,
-                     status: "shipped"
-                     }),
-                     Invoice.new({
-                      id: 3,
-                      unit_price: BigDecimal.new(1000),
-                      created_at: "1995-03-18 10:02:43 UTC",
-                      updated_at: "1995-03-25 10:02:43 UTC",
-                      customer_id: 1555,
-                      merchant_id: 5,
-                      status: "shipped"})]
-
-
-    @se = SalesEngine.new(mr, ir, invoice_repo)
-
-    se.items.all.map do |item|
-      this = merchants.find do |merchant|
-        merchant.id == item.merchant_id
-      end
-      item.merchant = this
-    end
-
-    se.merchants.all.map do |merchant|
-      this = items.select do |item|
-        item.merchant_id == merchant.id
-      end
-      merchant.items = this
-    end
-
-    se.invoices.all.map do |invoice|
-      this = merchants.find do |merchant|
-        invoice.merchant_id == merchant.id
-      end
-      invoice.merchant = this
-    end
-
-    se.merchants.all.map do |merchant|
-      this = invoices.select do |invoice|
-        merchant.id == invoice.merchant_id
-      end
-      merchant.invoices = this
-    end
+    @sa = SalesAnalyst.new(se)
 
   end
 
   def test_sales_analyst_is_initialized_with_sales_engine
-    sa = SalesAnalyst.new(se)
-    assert sa
+    assert_equal SalesAnalyst, sa.class
   end
 
-  def test_sales_analyst_has_acces_to_merchants_and_items
-    sa = SalesAnalyst.new(se)
+  def test_sales_analyst_has_acces_to_item_repo
+    assert_equal ItemRepository, sa.items.class
+  end
 
-    assert sa.items
-    assert sa.merchants
+  def test_sales_analyst_has_acces_to_merchant_repo
+    assert_equal MerchantRepository, sa.merchants.class
+  end
+
+  def test_sales_analyst_has_acces_to_invoice_repo
+    assert_equal InvoiceRepository, sa.invoices.class
+  end
+
+  def test_sales_analyst_has_acces_to_invoice_item_repo
+    assert_equal InvoiceItemRepository, sa.invoice_items.class
+  end
+
+  def test_sales_analyst_has_acces_to_transaction_repo
+    assert_equal TransactionRepository, sa.transactions.class
+  end
+
+  def test_sales_analyst_has_acces_to_customer_repo
+    assert_equal CustomerRepository, sa.customers.class
   end
 
   def test_average_items_per_merchant_returns_avg
-    sa = SalesAnalyst.new(se)
-
-    assert_equal 2.33, sa.average_items_per_merchant
+    assert_equal 1.0, sa.average_items_per_merchant
   end
 
   def test_average_items_per_merchant_standard_deviation_returns
-    sa = SalesAnalyst.new(se)
-    assert_equal 3.21, sa.average_items_per_merchant_standard_deviation
+    assert_equal 0, sa.average_items_per_merchant_standard_deviation
   end
 
   def test_merchants_with_high_item_count_returns_array_of_merchants_up_one_from_standard_dev
-    sa = SalesAnalyst.new(se)
-    assert_equal "Turing School", sa.merchants_with_high_item_count[0].name
+    assert_equal 0, sa.merchants_with_high_item_count.length
   end
 
   def test_average_item_price_for_merchant_returns_avg_price
-    sa = SalesAnalyst.new(se)
-    assert_equal 22.67, sa.average_item_price_for_merchant(5).to_f
+    assert_equal 35.0, sa.average_item_price_for_merchant(5)
   end
 
   def test_standard_deviation_for_unit_price
-    sa = SalesAnalyst.new(se)
-    assert_equal 13.72, sa.standard_deviation_for_unit_price
+    assert_equal 5.87, sa.standard_deviation_for_unit_price
   end
 
   def test_golden_items_returns_items_with_unit_price_two_over_mean_unit_price
-    sa = SalesAnalyst.new(se)
-    assert_equal "Stupid Expensive Pen", sa.golden_items[0].name
+    assert_equal 0, sa.golden_items.length
   end
 
   def test_finding_average_average_price_per_merchant
-    sa = SalesAnalyst.new(se)
-    price = 11
-    assert_equal price, sa.average_average_price_per_merchant.floor
+    assert_equal 26, sa.average_average_price_per_merchant.floor
   end
 
   def test_average_invoices_per_merchant
@@ -207,7 +91,7 @@ class SalesAnalystTest < Minitest::Test
 
   def test_average_invoices_per_merchant_standard_deviation
     sa = SalesAnalyst.new(se)
-    assert_equal 1, sa.average_invoices_per_merchant_standard_deviation
+    assert_equal 0, sa.average_invoices_per_merchant_standard_deviation
   end
 
   def test_bottom_merchants_by_invoice_count
@@ -222,11 +106,49 @@ class SalesAnalystTest < Minitest::Test
 
   def test_top_days_by_invoice_count_returns_array_with_days_containing_most_invoices
     sa = SalesAnalyst.new(se)
-    assert_equal [], sa.top_days_by_invoice_count
+    assert_equal ["Saturday"], sa.top_days_by_invoice_count
   end
 
   def test_invoice_status_returns_percentage
     sa = SalesAnalyst.new(se)
-    assert_equal 33.33, sa.invoice_status(:pending)
+    assert_equal 60.0, sa.invoice_status(:pending)
   end
+
+  def test_total_revenue_by_date_returns_revenue_for_date
+    assert_equal 0, sa.total_revenue_by_date(Time.parse("2012/03/27")).to_f
+  end
+
+  def test_top_revenue_earners_returns_array_of_top_earners
+    assert_equal 3, sa.top_revenue_earners(3).length
+  end
+
+  def test_revenue_by_merchant_returns_total_revenue
+    assert_equal 13416.0, sa.revenue_by_merchant(2).to_f
+  end
+
+  def test_merchants_with_pending_status_returns_any_merchant_with_pending
+    assert_equal 0, sa.merchants_with_pending_invoices.length
+  end
+
+  def test_merchants_with_only_one_item
+    assert_equal 5, sa.merchants_with_only_one_item.length
+  end
+
+  def test_merchants_with_only_one_item_registered_in_month_returns_merchants
+    assert_equal 1, sa.merchants_with_only_one_item_registered_in_month("March").length
+  end
+
+  def test_merchants_ranked_by_revenues_first_merchant_is_highest
+    assert_equal 2, sa.merchants_ranked_by_revenue.first.id
+  end
+
+  def test_this
+    assert_equal 1, sa.most_sold_item_for_merchant(2).length
+  end
+
+  def test_this1
+    assert_equal 2, sa.best_item_for_merchant(2).id
+  end
+
+
 end

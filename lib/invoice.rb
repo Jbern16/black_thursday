@@ -42,7 +42,7 @@ class Invoice
   end
 
   def item_quantity
-    s = invoice_items.reduce(0) do |sum, invoice_item|
+    invoice_items.reduce(0) do |sum, invoice_item|
       sum += invoice_item.quantity
       sum
     end

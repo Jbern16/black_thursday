@@ -1,4 +1,4 @@
-class StandardDeviator
+class StdDeviator
 
   def self.square_root_of_sum_divided_by(numbers_squared)
     sum = numbers_squared.reduce(:+)
@@ -6,5 +6,11 @@ class StandardDeviator
 
     standard_deviation.round(2)
   end
+
+  def self.deviations(num_of_dev, mean, stddev)
+    mean + stddev * num_of_dev
+  end
+
+
 
 end

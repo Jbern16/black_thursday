@@ -16,12 +16,12 @@ class SalesAnalystTest < Minitest::Test
 
   def setup
     @se = SalesEngine.from_csv({
-      :items     => "./data/fake_items.csv",
-      :merchants => "./data/fake_merchants.csv",
-      :invoices => "./data/fake_invoices.csv",
-      :invoice_items => "./data/fake_invoice_items.csv",
-      :transactions => "./data/fake_transactions.csv",
-      :customers => "./data/fake_customer.csv"
+      :items     => "./data/fixture_items.csv",
+      :merchants => "./data/fixture_merchants.csv",
+      :invoices => "./data/fixture_invoices.csv",
+      :invoice_items => "./data/fixture_invoice_items.csv",
+      :transactions => "./data/fixture_transactions.csv",
+      :customers => "./data/fixture_customer.csv"
     })
 
     @sa = SalesAnalyst.new(se)
@@ -142,11 +142,11 @@ class SalesAnalystTest < Minitest::Test
     assert_equal 2, sa.merchants_ranked_by_revenue.first.id
   end
 
-  def test_this
+  def test_we_find_most_sold_item_for_mercant
     assert_equal 1, sa.most_sold_item_for_merchant(2).length
   end
 
-  def test_this1
+  def test_we_find_best_item_for_merchant_when_provided_an_id
     assert_equal 2, sa.best_item_for_merchant(2).id
   end
 

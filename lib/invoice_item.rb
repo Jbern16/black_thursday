@@ -32,6 +32,10 @@ class InvoiceItem
     BigDecimal.new(unit_price_to_dollars)
   end
 
+  def total_price
+    quantity * unit_price
+  end
+
   def inspect
     "#<#{self.class}>"
   end

@@ -1,17 +1,20 @@
 require_relative 'sales_engine'
 require_relative 'merchant_repository'
 require_relative 'standard_deviator'
+require 'time'
 
 class SalesAnalyst
-  attr_reader :items, :merchants, :sales_engine, :invoices
-
-
+  attr_reader :items, :merchants, :sales_engine, :invoices,
+              :transactions, :customers, :invoice_items
 
   def initialize(sales_engine)
     @sales_engine = sales_engine
     @items = sales_engine.items
     @merchants = sales_engine.merchants
     @invoices = sales_engine.invoices
+    @invoice_items = sales_engine.invoice_items
+    @transactions = sales_engine.transactions
+    @customers = sales_engine.customers
   end
 
   def average_items_per_merchant
@@ -49,8 +52,9 @@ class SalesAnalyst
 
   def standard_deviation_for_unit_price
     numbers_squared = items.all.map do |item|
-      ((item.unit_price) - items_average_unit_price) ** 2
-    end
+      # binding.pry
+        ((item.unit_price) - items_average_unit_price) ** 2
+      end
     StandardDeviator.square_root_of_sum_divided_by(numbers_squared)
   end
 
@@ -107,5 +111,40 @@ class SalesAnalyst
     percent_decimal = status_count.to_f / invoices.all.count
     (percent_decimal * 100).round(2)
   end
+
+  def total_revenue_by_date(date)
+    seleced_invoices_items = invoice_items.all.select do |invoice|
+      invoice.created_at == date
+    end
+
+    seleced_invoices_items.reduce(0) do |sum, invoice_item|
+      binding.pry
+      sum += invoice_item.unit_price
+      sum
+    end
+  end
+
+  def top_revenue_earners(number_of_merchants=20)
+    merchants.all.max_by(number_of_merchants) do |merchant|
+      merchant.revenue
+    end
+  end
+
+  def revenue_by_merchant(merchant_id)
+    merchants.find_by_id(merchant_id).revenue
+  end
+
+  def merchants_with_pending_invoices
+    merchants.all.select do |merchant|
+      merchant.invoice_status(:pending)
+    end
+  end
+
+  def merchants_with_only_one_item
+    merchants.all.select do |merchant|
+      merchant.items.count == 1
+    end
+  end
+
 
 end

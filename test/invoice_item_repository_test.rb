@@ -6,7 +6,7 @@ require_relative '../lib/invoice_item_repository'
 require_relative '../lib/invoice_item'
 
 
-class IvoiceItemRepositoryTest < Minitest::Test
+class InvoiceItemRepositoryTest < Minitest::Test
   attr_reader :invoice_item_repo
               :invoice_item
 

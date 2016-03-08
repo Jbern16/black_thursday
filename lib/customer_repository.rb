@@ -8,7 +8,7 @@ class CustomerRepository
 
   include CsvLoader
 
-  def initialize(file_path)
+  def initialize(file_path=nil)
     from_csv(file_path)
   end
 

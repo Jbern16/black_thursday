@@ -59,17 +59,17 @@ class SalesEngineTest < Minitest::Test
 
   def test_merchant_has_invoices
     merchant = se.merchants.find_by_id(5)
-    assert_equal 2, merchant.invoices.length
+    assert_equal 1, merchant.invoices.length
   end
 
   def test_invoice_has_items
     invoice = se.invoices.find_by_id(1)
-    assert_equal 5, invoice.items.length
+    assert_equal 1, invoice.items.length
   end
 
   def test_invoice_has_transactions
     invoice = se.invoices.find_by_id(3)
-    assert_equal 2, invoice.transactions.length
+    assert_equal 1, invoice.transactions.length
   end
 
   def test_invoice_has_customer
@@ -89,7 +89,7 @@ class SalesEngineTest < Minitest::Test
 
   def test_customer_has_merchants
     customer = se.customers.find_by_id(5)
-    assert_equal 2, customer.merchants.length
+    assert_equal 1, customer.merchants.length
   end
 
 end

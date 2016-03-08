@@ -25,4 +25,20 @@ class Merchant
     "#<#{self.class}>"
   end
 
+  def revenue
+    invoices.map do |invoice|
+      invoice.invoice_items.reduce(0) do |sum, invoice_item|
+        sum += invoice_item.unit_price
+        sum
+      end
+    end.reduce(:+)
+  end
+
+
+  def invoice_status(status)
+    invoices.any? do |invoice|
+      invoice.status == status
+    end
+  end
+
 end

@@ -85,12 +85,9 @@ class SalesEngine
 
   def give_invoice_its_items(invoice_items, invoices, items)
     invoice_items.all.map do |invoice_item|
-      next if invoice_items.all.empty?
       invoices.all.map do |invoice|
-
-        if invoice_item.invoice_id == invoice.id
-          invoice.items << items.find_by_id(invoice_item.item_id)
-        end
+        match = invoice_item.invoice_id == invoice.id
+        invoice.items << items.find_by_id(invoice_item.item_id) if match
       end
     end
   end

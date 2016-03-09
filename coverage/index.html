@@ -14,7 +14,7 @@
       <img src="./assets/0.10.0/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" style="display:none;">
-      <div class="timestamp">Generated <abbr class="timeago" title="2016-03-09T12:18:10-07:00">2016-03-09T12:18:10-07:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2016-03-09T14:00:11-07:00">2016-03-09T14:00:11-07:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
@@ -25,15 +25,15 @@
      covered at
      <span class="covered_strength">
        <span class="green">
-         282.36
+         282.91
        </span>
     </span> hits/line)
   </h2>
   <a name="AllFiles"></a>
   <div>
     <b>30</b> files in total.
-    <b>1012</b> relevant lines. 
-    <span class="green"><b>995</b> lines covered</span> and
+    <b>1010</b> relevant lines. 
+    <span class="green"><b>993</b> lines covered</span> and
     <span class="red"><b>17</b> lines missed </span>
   </div>
   <table class="file_list">
@@ -163,9 +163,9 @@
       <tr>
         <td class="strong"><a href="#9e27b29878351fd5a815efe059f02ff62745a44d" class="src_link" title="lib/sales_analyst.rb">lib/sales_analyst.rb</a></td>
         <td class="green strong">100.0 %</td>
-        <td>198</td>
-        <td>115</td>
-        <td>115</td>
+        <td>195</td>
+        <td>113</td>
+        <td>113</td>
         <td>0</td>
         <td>4.5</td>
       </tr>
@@ -3647,8 +3647,8 @@
     <h3>lib/sales_analyst.rb</h3>
     <h4><span class="green">100.0 %</span> covered</h4>
     <div>
-      <b>115</b> relevant lines. 
-      <span class="green"><b>115</b> lines covered</span> and
+      <b>113</b> relevant lines. 
+      <span class="green"><b>113</b> lines covered</span> and
       <span class="red"><b>0</b> lines missed.</span>
     </div>
   </div>
@@ -4625,220 +4625,202 @@
         <li class="covered" data-hits="1" data-linenumber="162">
           <span class="hits">1</span>
           
-          <code class="ruby">    paid_invoice_items = find_invoice_items(merchant_id)</code>
+          <code class="ruby">    max_items = max_items(find_invoice_items(merchant_id)) do |inv_itm,itms|</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="163">
           <span class="hits">1</span>
           
-          <code class="ruby">    max_items = max_items(paid_invoice_items,&#39;quantity&#39;)</code>
+          <code class="ruby">      itms[inv_itm.item_id] += inv_itm.quantity</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="164">
           
           
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="165">
+          
+          
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="165">
+        <li class="covered" data-hits="2" data-linenumber="166">
           <span class="hits">2</span>
           
           <code class="ruby">    max_items.keys.map {|id| items.find_by_id(id)}</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="166">
+        <li class="never" data-hits="" data-linenumber="167">
           
           
           <code class="ruby">  end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="167">
+        <li class="never" data-hits="" data-linenumber="168">
           
           
           <code class="ruby"></code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="168">
-          <span class="hits">1</span>
-          
-          <code class="ruby">  def best_item_for_merchant(merchant_id)</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="169">
           <span class="hits">1</span>
           
-          <code class="ruby">    paid_invoice_items = find_invoice_items(merchant_id)</code>
+          <code class="ruby">  def best_item_for_merchant(merchant_id)</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="170">
           <span class="hits">1</span>
           
-          <code class="ruby">    best_item_id = max_items(paid_invoice_items,&#39;total&#39;).keys.first</code>
+          <code class="ruby">    best_item_id = max_items(find_invoice_items(merchant_id)) do |inv_itm,itms|</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="171">
-          
-          
-          <code class="ruby"></code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="172">
+        <li class="covered" data-hits="1" data-linenumber="171">
           <span class="hits">1</span>
           
-          <code class="ruby">    items.find_by_id(best_item_id)</code>
+          <code class="ruby">      itms[inv_itm.item_id] += inv_itm.total_price</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="172">
+          
+          
+          <code class="ruby">    end.keys.first</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="173">
           
           
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="174">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    items.find_by_id(best_item_id)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="175">
+          
+          
           <code class="ruby">  end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="174">
+        <li class="never" data-hits="" data-linenumber="176">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="175">
+        <li class="covered" data-hits="1" data-linenumber="177">
           <span class="hits">1</span>
           
           <code class="ruby">  def find_invoice_items(merchant_id)</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="176">
+        <li class="covered" data-hits="2" data-linenumber="178">
           <span class="hits">2</span>
           
           <code class="ruby">    merchant = merchants.find_by_id(merchant_id)</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="177">
+        <li class="covered" data-hits="2" data-linenumber="179">
           <span class="hits">2</span>
           
           <code class="ruby">    merchant.paid_merchant_invoices.flat_map do |paid_invoice|</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="178">
+        <li class="covered" data-hits="2" data-linenumber="180">
           <span class="hits">2</span>
           
           <code class="ruby">      invoice_items.find_all_by_invoice_id(paid_invoice.id)</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="179">
+        <li class="never" data-hits="" data-linenumber="181">
           
           
           <code class="ruby">    end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="180">
+        <li class="never" data-hits="" data-linenumber="182">
           
           
           <code class="ruby">  end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="181">
+        <li class="never" data-hits="" data-linenumber="183">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="182">
+        <li class="covered" data-hits="1" data-linenumber="184">
           <span class="hits">1</span>
           
-          <code class="ruby">  def max_items(paid_invoice_items, function)</code>
+          <code class="ruby">  def max_items(paid_invoice_items, &amp;block)</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="183">
+        <li class="covered" data-hits="2" data-linenumber="185">
           <span class="hits">2</span>
           
           <code class="ruby">    table = paid_invoice_items.each_with_object(Hash.new(0)) do |inv_itm, itms|</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="184">
+        <li class="covered" data-hits="2" data-linenumber="186">
           <span class="hits">2</span>
           
-          <code class="ruby">      if function == &#39;total&#39;</code>
+          <code class="ruby">      block.call(inv_itm, itms)</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="185">
-          <span class="hits">1</span>
-          
-          <code class="ruby">        itms[inv_itm.item_id] += inv_itm.total_price</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="186">
-          
-          
-          <code class="ruby">      elsif function == &#39;quantity&#39;</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="187">
-          <span class="hits">1</span>
-          
-          <code class="ruby">        itms[inv_itm.item_id] += inv_itm.quantity</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="188">
-          
-          
-          <code class="ruby">      end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="189">
+        <li class="never" data-hits="" data-linenumber="187">
           
           
           <code class="ruby">    end</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="190">
+        <li class="covered" data-hits="2" data-linenumber="188">
           <span class="hits">2</span>
           
           <code class="ruby">    max_items_by_quantity(table)</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="191">
+        <li class="never" data-hits="" data-linenumber="189">
           
           
           <code class="ruby">  end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="192">
+        <li class="never" data-hits="" data-linenumber="190">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="193">
+        <li class="covered" data-hits="1" data-linenumber="191">
           <span class="hits">1</span>
           
           <code class="ruby">  def max_items_by_quantity(table)</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="194">
+        <li class="covered" data-hits="2" data-linenumber="192">
           <span class="hits">2</span>
           
           <code class="ruby">    max_value = table.values.max</code>
         </li>
       
-        <li class="covered" data-hits="4" data-linenumber="195">
+        <li class="covered" data-hits="4" data-linenumber="193">
           <span class="hits">4</span>
           
           <code class="ruby">    table.select {|_id, amount| amount == max_value}</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="196">
+        <li class="never" data-hits="" data-linenumber="194">
           
           
           <code class="ruby">  end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="197">
-          
-          
-          <code class="ruby"></code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="198">
+        <li class="never" data-hits="" data-linenumber="195">
           
           
           <code class="ruby">end</code>

@@ -14,26 +14,26 @@
       <img src="./assets/0.10.0/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" style="display:none;">
-      <div class="timestamp">Generated <abbr class="timeago" title="2016-03-09T12:10:43-07:00">2016-03-09T12:10:43-07:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2016-03-09T12:18:10-07:00">2016-03-09T12:18:10-07:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
         <div class="file_list_container" id="AllFiles">
   <h2>
     <span class="group_name">All Files</span>
-    (<span class="covered_percent"><span class="green">98.33%</span></span>
+    (<span class="covered_percent"><span class="green">98.32%</span></span>
      covered at
      <span class="covered_strength">
        <span class="green">
-         280.74
+         282.36
        </span>
     </span> hits/line)
   </h2>
   <a name="AllFiles"></a>
   <div>
     <b>30</b> files in total.
-    <b>1018</b> relevant lines. 
-    <span class="green"><b>1001</b> lines covered</span> and
+    <b>1012</b> relevant lines. 
+    <span class="green"><b>995</b> lines covered</span> and
     <span class="red"><b>17</b> lines missed </span>
   </div>
   <table class="file_list">
@@ -83,7 +83,7 @@
       <tr>
         <td class="strong"><a href="#322d739a8118ddf1412cbc4d4ee6978227a53c6b" class="src_link" title="lib/invoice.rb">lib/invoice.rb</a></td>
         <td class="green strong">96.55 %</td>
-        <td>56</td>
+        <td>49</td>
         <td>29</td>
         <td>28</td>
         <td>1</td>
@@ -167,7 +167,7 @@
         <td>115</td>
         <td>115</td>
         <td>0</td>
-        <td>4.8</td>
+        <td>4.5</td>
       </tr>
       
       <tr>
@@ -313,9 +313,9 @@
       <tr>
         <td class="strong"><a href="#352b4a76fc9b4cbeef4ffed214e79459291072ab" class="src_link" title="test/sales_analyst_test.rb">test/sales_analyst_test.rb</a></td>
         <td class="green strong">100.0 %</td>
-        <td>156</td>
-        <td>82</td>
-        <td>82</td>
+        <td>150</td>
+        <td>76</td>
+        <td>76</td>
         <td>0</td>
         <td>1.7</td>
       </tr>
@@ -1220,79 +1220,37 @@
           <code class="ruby"></code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="44">
-          
-          
-          <code class="ruby">  # def item_quantity</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="45">
-          
-          
-          <code class="ruby">  #   invoice_items.reduce(0) do |sum, invoice_item|</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="46">
-          
-          
-          <code class="ruby">  #     sum += invoice_item.quantity</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="47">
-          
-          
-          <code class="ruby">  #     sum</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="48">
-          
-          
-          <code class="ruby">  #   end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="49">
-          
-          
-          <code class="ruby">  # end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="50">
-          
-          
-          <code class="ruby"></code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="51">
+        <li class="covered" data-hits="1" data-linenumber="44">
           <span class="hits">1</span>
           
           <code class="ruby">  def failed_transaction?</code>
         </li>
       
-        <li class="covered" data-hits="5" data-linenumber="52">
+        <li class="covered" data-hits="5" data-linenumber="45">
           <span class="hits">5</span>
           
           <code class="ruby">    transactions.all? do |transaction|</code>
         </li>
       
-        <li class="covered" data-hits="5" data-linenumber="53">
+        <li class="covered" data-hits="5" data-linenumber="46">
           <span class="hits">5</span>
           
           <code class="ruby">      transaction.result == &quot;failed&quot;</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="54">
+        <li class="never" data-hits="" data-linenumber="47">
           
           
           <code class="ruby">    end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="55">
+        <li class="never" data-hits="" data-linenumber="48">
           
           
           <code class="ruby">  end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="56">
+        <li class="never" data-hits="" data-linenumber="49">
           
           
           <code class="ruby">end</code>
@@ -3770,44 +3728,44 @@
           <code class="ruby">  def initialize(sales_engine)</code>
         </li>
       
-        <li class="covered" data-hits="35" data-linenumber="13">
-          <span class="hits">35</span>
+        <li class="covered" data-hits="29" data-linenumber="13">
+          <span class="hits">29</span>
           
           <code class="ruby">    @sales_engine = sales_engine</code>
         </li>
       
-        <li class="covered" data-hits="35" data-linenumber="14">
-          <span class="hits">35</span>
+        <li class="covered" data-hits="29" data-linenumber="14">
+          <span class="hits">29</span>
           
           <code class="ruby">    @items = sales_engine.items</code>
         </li>
       
-        <li class="covered" data-hits="35" data-linenumber="15">
-          <span class="hits">35</span>
+        <li class="covered" data-hits="29" data-linenumber="15">
+          <span class="hits">29</span>
           
           <code class="ruby">    @merchants = sales_engine.merchants</code>
         </li>
       
-        <li class="covered" data-hits="35" data-linenumber="16">
-          <span class="hits">35</span>
+        <li class="covered" data-hits="29" data-linenumber="16">
+          <span class="hits">29</span>
           
           <code class="ruby">    @invoices = sales_engine.invoices</code>
         </li>
       
-        <li class="covered" data-hits="35" data-linenumber="17">
-          <span class="hits">35</span>
+        <li class="covered" data-hits="29" data-linenumber="17">
+          <span class="hits">29</span>
           
           <code class="ruby">    @invoice_items = sales_engine.invoice_items</code>
         </li>
       
-        <li class="covered" data-hits="35" data-linenumber="18">
-          <span class="hits">35</span>
+        <li class="covered" data-hits="29" data-linenumber="18">
+          <span class="hits">29</span>
           
           <code class="ruby">    @transactions = sales_engine.transactions</code>
         </li>
       
-        <li class="covered" data-hits="35" data-linenumber="19">
-          <span class="hits">35</span>
+        <li class="covered" data-hits="29" data-linenumber="19">
+          <span class="hits">29</span>
           
           <code class="ruby">    @customers = sales_engine.customers</code>
         </li>
@@ -10163,8 +10121,8 @@
     <h3>test/sales_analyst_test.rb</h3>
     <h4><span class="green">100.0 %</span> covered</h4>
     <div>
-      <b>82</b> relevant lines. 
-      <span class="green"><b>82</b> lines covered</span> and
+      <b>76</b> relevant lines. 
+      <span class="green"><b>76</b> lines covered</span> and
       <span class="red"><b>0</b> lines missed.</span>
     </div>
   </div>
@@ -10709,103 +10667,103 @@
         <li class="covered" data-hits="1" data-linenumber="90">
           <span class="hits">1</span>
           
-          <code class="ruby">    sa = SalesAnalyst.new(se)</code>
+          <code class="ruby">    assert_equal 1.0, sa.average_invoices_per_merchant</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="91">
-          <span class="hits">1</span>
+        <li class="never" data-hits="" data-linenumber="91">
           
-          <code class="ruby">    assert_equal 1.0, sa.average_invoices_per_merchant</code>
+          
+          <code class="ruby">  end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="92">
           
           
-          <code class="ruby">  end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="93">
-          
-          
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="94">
+        <li class="covered" data-hits="1" data-linenumber="93">
           <span class="hits">1</span>
           
           <code class="ruby">  def test_average_invoices_per_merchant_standard_deviation</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="95">
-          <span class="hits">1</span>
-          
-          <code class="ruby">    sa = SalesAnalyst.new(se)</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="96">
+        <li class="covered" data-hits="1" data-linenumber="94">
           <span class="hits">1</span>
           
           <code class="ruby">    assert_equal 0, sa.average_invoices_per_merchant_standard_deviation</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="97">
+        <li class="never" data-hits="" data-linenumber="95">
           
           
           <code class="ruby">  end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="98">
+        <li class="never" data-hits="" data-linenumber="96">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="99">
+        <li class="covered" data-hits="1" data-linenumber="97">
           <span class="hits">1</span>
           
           <code class="ruby">  def test_bottom_merchants_by_invoice_count</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="100">
-          <span class="hits">1</span>
-          
-          <code class="ruby">    sa = SalesAnalyst.new(se)</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="101">
+        <li class="covered" data-hits="1" data-linenumber="98">
           <span class="hits">1</span>
           
           <code class="ruby">    assert_equal [], sa.bottom_merchants_by_invoice_count</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="102">
+        <li class="never" data-hits="" data-linenumber="99">
           
           
           <code class="ruby">  end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="103">
+        <li class="never" data-hits="" data-linenumber="100">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="104">
+        <li class="covered" data-hits="1" data-linenumber="101">
           <span class="hits">1</span>
           
           <code class="ruby">  def test_top_merchants_by_invoice_count_returns_array_of_merchants_with_most_invoices</code>
         </li>
       
+        <li class="covered" data-hits="1" data-linenumber="102">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    assert_equal [], sa.top_merchants_by_invoice_count</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="103">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="104">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
         <li class="covered" data-hits="1" data-linenumber="105">
           <span class="hits">1</span>
           
-          <code class="ruby">    sa = SalesAnalyst.new(se)</code>
+          <code class="ruby">  def test_top_days_by_invoice_count_returns_array_with_days_containing_most_invoices</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="106">
           <span class="hits">1</span>
           
-          <code class="ruby">    assert_equal [], sa.top_merchants_by_invoice_count</code>
+          <code class="ruby">    assert_equal [&quot;Saturday&quot;], sa.top_days_by_invoice_count</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="107">
@@ -10823,286 +10781,250 @@
         <li class="covered" data-hits="1" data-linenumber="109">
           <span class="hits">1</span>
           
-          <code class="ruby">  def test_top_days_by_invoice_count_returns_array_with_days_containing_most_invoices</code>
+          <code class="ruby">  def test_invoice_status_returns_percentage</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="110">
           <span class="hits">1</span>
           
-          <code class="ruby">    sa = SalesAnalyst.new(se)</code>
+          <code class="ruby">    assert_equal 60.0, sa.invoice_status(:pending)</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="111">
-          <span class="hits">1</span>
+        <li class="never" data-hits="" data-linenumber="111">
           
-          <code class="ruby">    assert_equal [&quot;Saturday&quot;], sa.top_days_by_invoice_count</code>
+          
+          <code class="ruby">  end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="112">
           
           
-          <code class="ruby">  end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="113">
-          
-          
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="114">
-          <span class="hits">1</span>
-          
-          <code class="ruby">  def test_invoice_status_returns_percentage</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="115">
-          <span class="hits">1</span>
-          
-          <code class="ruby">    sa = SalesAnalyst.new(se)</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="116">
-          <span class="hits">1</span>
-          
-          <code class="ruby">    assert_equal 60.0, sa.invoice_status(:pending)</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="117">
-          
-          
-          <code class="ruby">  end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="118">
-          
-          
-          <code class="ruby"></code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="119">
+        <li class="covered" data-hits="1" data-linenumber="113">
           <span class="hits">1</span>
           
           <code class="ruby">  def test_total_revenue_by_date_returns_revenue_for_date</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="120">
+        <li class="covered" data-hits="1" data-linenumber="114">
           <span class="hits">1</span>
           
           <code class="ruby">    assert_equal 0, sa.total_revenue_by_date(Time.parse(&quot;2012/03/27&quot;)).to_f</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="121">
+        <li class="never" data-hits="" data-linenumber="115">
           
           
           <code class="ruby">  end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="122">
+        <li class="never" data-hits="" data-linenumber="116">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="123">
+        <li class="covered" data-hits="1" data-linenumber="117">
           <span class="hits">1</span>
           
           <code class="ruby">  def test_top_revenue_earners_returns_array_of_top_earners</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="124">
+        <li class="covered" data-hits="1" data-linenumber="118">
           <span class="hits">1</span>
           
           <code class="ruby">    assert_equal 3, sa.top_revenue_earners(3).length</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="125">
+        <li class="never" data-hits="" data-linenumber="119">
           
           
           <code class="ruby">  end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="126">
+        <li class="never" data-hits="" data-linenumber="120">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="127">
+        <li class="covered" data-hits="1" data-linenumber="121">
           <span class="hits">1</span>
           
           <code class="ruby">  def test_revenue_by_merchant_returns_total_revenue</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="128">
+        <li class="covered" data-hits="1" data-linenumber="122">
           <span class="hits">1</span>
           
           <code class="ruby">    assert_equal 13416.0, sa.revenue_by_merchant(2).to_f</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="129">
+        <li class="never" data-hits="" data-linenumber="123">
           
           
           <code class="ruby">  end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="130">
+        <li class="never" data-hits="" data-linenumber="124">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="131">
+        <li class="covered" data-hits="1" data-linenumber="125">
           <span class="hits">1</span>
           
           <code class="ruby">  def test_merchants_with_pending_status_returns_any_merchant_with_pending</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="132">
+        <li class="covered" data-hits="1" data-linenumber="126">
           <span class="hits">1</span>
           
           <code class="ruby">    assert_equal 0, sa.merchants_with_pending_invoices.length</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="133">
+        <li class="never" data-hits="" data-linenumber="127">
           
           
           <code class="ruby">  end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="134">
+        <li class="never" data-hits="" data-linenumber="128">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="135">
+        <li class="covered" data-hits="1" data-linenumber="129">
           <span class="hits">1</span>
           
           <code class="ruby">  def test_merchants_with_only_one_item</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="136">
+        <li class="covered" data-hits="1" data-linenumber="130">
           <span class="hits">1</span>
           
           <code class="ruby">    assert_equal 5, sa.merchants_with_only_one_item.length</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="137">
+        <li class="never" data-hits="" data-linenumber="131">
           
           
           <code class="ruby">  end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="138">
+        <li class="never" data-hits="" data-linenumber="132">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="139">
+        <li class="covered" data-hits="1" data-linenumber="133">
           <span class="hits">1</span>
           
           <code class="ruby">  def test_merchants_with_only_one_item_registered_in_month_returns_merchants</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="140">
+        <li class="covered" data-hits="1" data-linenumber="134">
           <span class="hits">1</span>
           
           <code class="ruby">    assert_equal 1, sa.merchants_with_only_one_item_registered_in_month(&quot;March&quot;).length</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="141">
+        <li class="never" data-hits="" data-linenumber="135">
           
           
           <code class="ruby">  end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="142">
+        <li class="never" data-hits="" data-linenumber="136">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="143">
+        <li class="covered" data-hits="1" data-linenumber="137">
           <span class="hits">1</span>
           
           <code class="ruby">  def test_merchants_ranked_by_revenues_first_merchant_is_highest</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="144">
+        <li class="covered" data-hits="1" data-linenumber="138">
           <span class="hits">1</span>
           
           <code class="ruby">    assert_equal 2, sa.merchants_ranked_by_revenue.first.id</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="145">
+        <li class="never" data-hits="" data-linenumber="139">
           
           
           <code class="ruby">  end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="146">
+        <li class="never" data-hits="" data-linenumber="140">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="147">
+        <li class="covered" data-hits="1" data-linenumber="141">
           <span class="hits">1</span>
           
           <code class="ruby">  def test_we_find_most_sold_item_for_mercant</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="148">
+        <li class="covered" data-hits="1" data-linenumber="142">
           <span class="hits">1</span>
           
           <code class="ruby">    assert_equal 1, sa.most_sold_item_for_merchant(2).length</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="149">
+        <li class="never" data-hits="" data-linenumber="143">
           
           
           <code class="ruby">  end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="150">
+        <li class="never" data-hits="" data-linenumber="144">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="151">
+        <li class="covered" data-hits="1" data-linenumber="145">
           <span class="hits">1</span>
           
           <code class="ruby">  def test_we_find_best_item_for_merchant_when_provided_an_id</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="152">
+        <li class="covered" data-hits="1" data-linenumber="146">
           <span class="hits">1</span>
           
           <code class="ruby">    assert_equal 2, sa.best_item_for_merchant(2).id</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="153">
+        <li class="never" data-hits="" data-linenumber="147">
           
           
           <code class="ruby">  end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="154">
+        <li class="never" data-hits="" data-linenumber="148">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="155">
+        <li class="never" data-hits="" data-linenumber="149">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="156">
+        <li class="never" data-hits="" data-linenumber="150">
           
           
           <code class="ruby">end</code>

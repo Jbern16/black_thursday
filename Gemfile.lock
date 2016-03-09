@@ -22,6 +22,14 @@ GEM
     equalizer (0.0.11)
     ice_nine (0.11.2)
     interception (0.5)
+<<<<<<< HEAD
+    method_source (0.8.2)
+    minitest (5.8.4)
+    mrspec (0.2.3)
+      minitest (~> 5.0)
+      rspec-core (~> 3.0)
+      what_weve_got_here_is_an_error_to_communicate (~> 0.0.7)
+=======
     json (1.8.3)
     method_source (0.8.2)
     minitest (5.8.4)
@@ -29,6 +37,7 @@ GEM
       minitest (~> 5.0)
       rspec-core (~> 3.2)
       what_weve_got_here_is_an_error_to_communicate (~> 0.0.8)
+>>>>>>> a041e56453abc4c37e0c071a81d2f3bb54df6525
     parallel (1.6.2)
     parser (2.3.0.6)
       ast (~> 2.2)
@@ -43,6 +52,11 @@ GEM
       parser (~> 2.3, >= 2.3.0.6)
       rainbow (~> 2.0)
     rouge (1.10.1)
+<<<<<<< HEAD
+    rspec-core (3.4.2)
+      rspec-support (~> 3.4.0)
+    rspec-support (3.4.1)
+=======
     rspec-core (3.4.4)
       rspec-support (~> 3.4.0)
     rspec-support (3.4.1)
@@ -51,6 +65,7 @@ GEM
       json (~> 1.8)
       simplecov-html (~> 0.10.0)
     simplecov-html (0.10.0)
+>>>>>>> a041e56453abc4c37e0c071a81d2f3bb54df6525
     slop (3.6.0)
     thread_safe (0.3.5)
     virtus (1.0.5)
@@ -58,7 +73,11 @@ GEM
       coercible (~> 1.0)
       descendants_tracker (~> 0.0, >= 0.0.3)
       equalizer (~> 0.0, >= 0.0.9)
+<<<<<<< HEAD
+    what_weve_got_here_is_an_error_to_communicate (0.0.7)
+=======
     what_weve_got_here_is_an_error_to_communicate (0.0.8)
+>>>>>>> a041e56453abc4c37e0c071a81d2f3bb54df6525
       binding_of_caller (~> 0.7.2)
       interception (~> 0.5)
       rouge (~> 1.8, != 1.9.1)

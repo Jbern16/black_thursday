@@ -56,12 +56,12 @@ class SalesEngineTest < Minitest::Test
 
   def test_invoice_has_merchants
     invoice = se.invoices.find_by_id(3)
-    assert_equal "merchant3", invoice.merchant.name
+    assert_equal "merchant2", invoice.merchant.name
   end
 
   def test_merchant_has_invoices
     merchant = se.merchants.find_by_id(5)
-    assert_equal 1, merchant.invoices.length
+    assert_equal 6, merchant.invoices.length
   end
 
   def test_invoice_has_items
@@ -86,12 +86,12 @@ class SalesEngineTest < Minitest::Test
 
   def test_merchant_has_customers
     merchant = se.merchants.find_by_id(4)
-    assert_equal 1, merchant.customers.length
+    assert_equal 3, merchant.customers.length
   end
 
   def test_customer_has_merchants
     customer = se.customers.find_by_id(5)
-    assert_equal 1, customer.merchants.length
+    assert_equal 15, customer.merchants.length
   end
 
 end

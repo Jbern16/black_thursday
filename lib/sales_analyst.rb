@@ -42,7 +42,7 @@ class SalesAnalyst
     prices = merchants.find_by_id(merchant_id).items.map do |item|
       item.unit_price
     end
-    mean = (average_unit_price = prices.reduce(:+) / prices.length).round(2)
+    mean = (prices.reduce(:+) / prices.length).round(2)
     BigDecimal.new(mean)
   end
 
@@ -80,7 +80,6 @@ class SalesAnalyst
     numbers_squared = merchants.all.map do |merchant|
       ((merchant.invoices.length) - average_invoices_per_merchant) ** 2
     end
-
     StdDeviator.square_root_of_sum_divided_by(numbers_squared)
   end
 
@@ -159,17 +158,19 @@ class SalesAnalyst
   end
 
   def most_sold_item_for_merchant(merchant_id)
-    paid_invoice_items = find_invoice_items(merchant_id)
-    max_items = max_items(paid_invoice_items,'quantity')
+    max_items = max_items(find_invoice_items(merchant_id)) do |inv_itm,itms|
+      itms[inv_itm.item_id] += inv_itm.quantity
+    end
 
-    max_items.keys.map {|id| items.find_by_id(id)}
+    max_items.keys.map { |id| items.find_by_id(id) }
   end
 
   def best_item_for_merchant(merchant_id)
-    paid_invoice_items = find_invoice_items(merchant_id)
-    best_item_id = max_items(paid_invoice_items,'total').keys.first
+    best_item_ids = max_items(find_invoice_items(merchant_id)) do |inv_itm,itms|
+      itms[inv_itm.item_id] += inv_itm.total_price
+    end
 
-    items.find_by_id(best_item_id)
+    items.find_by_id(best_item_ids.keys.first)
   end
 
   def find_invoice_items(merchant_id)
@@ -179,20 +180,16 @@ class SalesAnalyst
     end
   end
 
-  def max_items(paid_invoice_items, function)
-    table = paid_invoice_items.each_with_object(Hash.new(0)) do |inv_itm, itms|
-      if function == 'total'
-        itms[inv_itm.item_id] += inv_itm.total_price
-      elsif function == 'quantity'
-        itms[inv_itm.item_id] += inv_itm.quantity
-      end
+  def max_items(invoice_items, &block)
+    table = invoice_items.each_with_object(Hash.new(0)) do |inv_itm, itms|
+      block.call(inv_itm, itms)
     end
+
     max_items_by_quantity(table)
   end
 
   def max_items_by_quantity(table)
     max_value = table.values.max
-    table.select {|id, amount| amount == max_value}
+    table.select {|_id, amount| amount == max_value}
   end
-
 end

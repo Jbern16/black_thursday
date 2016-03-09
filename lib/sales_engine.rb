@@ -40,7 +40,6 @@ class SalesEngine
 
   def inject_repos(merchants,items,invoices,invoice_items,
                    transactions, customers)
-
     give_item_its_merchant(merchants , items)
     give_merchant_its_items(merchants, items)
     give_invoice_its_merchant(merchants, invoices)

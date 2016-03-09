@@ -1,3 +1,5 @@
+require 'simplecov'
+SimpleCov.start
 require 'minitest/autorun'
 require 'minitest/pride'
 require 'pry'
@@ -89,32 +91,26 @@ class SalesAnalystTest < Minitest::Test
   end
 
   def test_average_invoices_per_merchant
-    sa = SalesAnalyst.new(se)
     assert_equal 5.29, sa.average_invoices_per_merchant
   end
 
   def test_average_invoices_per_merchant_standard_deviation
-    sa = SalesAnalyst.new(se)
     assert_equal 1.98, sa.average_invoices_per_merchant_standard_deviation
   end
 
   def test_bottom_merchants_by_invoice_count
-    sa = SalesAnalyst.new(se)
     assert_equal 1, sa.bottom_merchants_by_invoice_count.length
   end
 
   def test_top_merchants_by_invoice_count_returns_array_of_merchants_with_most_invoices
-    sa = SalesAnalyst.new(se)
     assert_equal [], sa.top_merchants_by_invoice_count
   end
 
   def test_top_days_by_invoice_count_returns_array_with_days_containing_most_invoices
-    sa = SalesAnalyst.new(se)
     assert_equal ["Saturday"], sa.top_days_by_invoice_count
   end
 
   def test_invoice_status_returns_percentage
-    sa = SalesAnalyst.new(se)
     assert_equal 8.11, sa.invoice_status(:pending)
   end
 
@@ -157,6 +153,5 @@ class SalesAnalystTest < Minitest::Test
   def test_we_find_best_item_for_merchant_when_provided_an_id
     assert_equal 2, sa.best_item_for_merchant(2).id
   end
-
 
 end

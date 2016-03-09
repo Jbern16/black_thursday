@@ -41,13 +41,6 @@ class Invoice
     end
   end
 
-  def item_quantity
-    invoice_items.reduce(0) do |sum, invoice_item|
-      sum += invoice_item.quantity
-      sum
-    end
-  end
-
   def failed_transaction?
     transactions.all? do |transaction|
       transaction.result == "failed"

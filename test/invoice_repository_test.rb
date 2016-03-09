@@ -1,3 +1,5 @@
+require 'simplecov'
+SimpleCov.start
 require 'minitest/autorun'
 require 'minitest/pride'
 require 'time'
@@ -83,5 +85,5 @@ class InvoiceRepositoryTest < Minitest::Test
   def test_standard_deviation_of_days
    assert_equal 1.0, invoice_repo.standard_deviation_of_days
   end
-  
+
 end

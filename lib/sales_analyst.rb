@@ -160,19 +160,14 @@ class SalesAnalyst
 
   def most_sold_item_for_merchant(merchant_id)
     paid_invoice_items = find_invoice_items(merchant_id)
-    item_id_and_count = item_id_with_count(paid_invoice_items)
-    selected_items = group(item_id_and_count).select do |item|
-      item.is_a?(String)
-    end
+    max_items = max_items(paid_invoice_items,'quantity')
 
-    selected_items.map {|item_id| items.find_by_id(item_id.to_i)}
+    max_items.keys.map {|id| items.find_by_id(id)}
   end
 
-  def group(item_id_and_count)
-    item_id_and_count.group_by do |key, value|
-      key = key
-      value
-    end.max.flatten
+  def max_items_by_quantity(table)
+    max_value = table.values.max
+    table.select {|id, amount| amount == max_value}
   end
 
   def find_invoice_items(merchant_id)
@@ -182,21 +177,21 @@ class SalesAnalyst
     end.flatten
   end
 
-  def item_id_with_count(paid_invoice_items, multiplier=nil)
-    paid_invoice_items.reduce(Hash.new(0)) do |items, invoice_item|
-      id = invoice_item.item_id
-      items[id.to_s] = 0 if items[id].nil?
-      items[id.to_s] +=  invoice_item.total_price if multiplier
-      items[id.to_s] += invoice_item.quantity unless multiplier
-      items
+  def max_items(paid_invoice_items, function)
+    table = paid_invoice_items.each_with_object(Hash.new(0)) do |inv_itm, itms|
+      if function == 'total'
+        itms[inv_itm.item_id] += inv_itm.total_price
+      elsif function == 'quantity'
+        itms[inv_itm.item_id] += inv_itm.quantity
+      end
     end
+    max_items_by_quantity(table)
   end
 
   def best_item_for_merchant(merchant_id)
     paid_invoice_items = find_invoice_items(merchant_id)
-    item_id_and_value = item_id_with_count(paid_invoice_items, "multiplier")
-    item_id = group(item_id_and_value)[1].to_i
-    items.find_by_id(item_id)
-  end
+    best_item_id = max_items(paid_invoice_items,'total').keys.first
 
+    items.find_by_id(best_item_id)
+  end
 end

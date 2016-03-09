@@ -42,7 +42,7 @@ class SalesAnalyst
     prices = merchants.find_by_id(merchant_id).items.map do |item|
       item.unit_price
     end
-    mean = (average_unit_price = prices.reduce(:+) / prices.length).round(2)
+    mean = (prices.reduce(:+) / prices.length).round(2)
     BigDecimal.new(mean)
   end
 
@@ -192,7 +192,7 @@ class SalesAnalyst
 
   def max_items_by_quantity(table)
     max_value = table.values.max
-    table.select {|id, amount| amount == max_value}
+    table.select {|_id, amount| amount == max_value}
   end
 
 end

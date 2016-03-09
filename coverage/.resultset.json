@@ -1,15 +1,13 @@
 {
   "RSpec": {
     "coverage": {
-      "/Users/thoms_mac/turing/1module/class_projects/1602_projects/black_thursday/lib/customer_repository.rb": [
+      "/Users/jonathanbernesser/Turing/1module/Black_Thursday/black_thursday/lib/customer_repository.rb": [
         1,
         1,
         1,
         null,
         1,
-        null,
         1,
-        null,
         1,
         null,
         1,
@@ -59,12 +57,11 @@
         null,
         null
       ],
-      "/Users/thoms_mac/turing/1module/class_projects/1602_projects/black_thursday/lib/customer.rb": [
+      "/Users/jonathanbernesser/Turing/1module/Black_Thursday/black_thursday/lib/customer.rb": [
         1,
         null,
         1,
         1,
-        null,
         null,
         1,
         null,
@@ -84,7 +81,7 @@
         null,
         null
       ],
-      "/Users/thoms_mac/turing/1module/class_projects/1602_projects/black_thursday/lib/csv_loader.rb": [
+      "/Users/jonathanbernesser/Turing/1module/Black_Thursday/black_thursday/lib/csv_loader.rb": [
         1,
         null,
         1,
@@ -95,7 +92,7 @@
         null,
         null
       ],
-      "/Users/thoms_mac/turing/1module/class_projects/1602_projects/black_thursday/test/customer_test.rb": [
+      "/Users/jonathanbernesser/Turing/1module/Black_Thursday/black_thursday/test/customer_test.rb": [
         1,
         1,
         1,
@@ -104,7 +101,6 @@
         1,
         1,
         1,
-        null,
         null,
         1,
         1,
@@ -128,7 +124,7 @@
         null,
         null
       ],
-      "/Users/thoms_mac/turing/1module/class_projects/1602_projects/black_thursday/test/invoice_item_repository_test.rb": [
+      "/Users/jonathanbernesser/Turing/1module/Black_Thursday/black_thursday/test/invoice_item_repository_test.rb": [
         1,
         1,
         1,
@@ -137,7 +133,6 @@
         1,
         1,
         1,
-        null,
         null,
         1,
         1,
@@ -198,14 +193,13 @@
         null,
         null
       ],
-      "/Users/thoms_mac/turing/1module/class_projects/1602_projects/black_thursday/lib/invoice_item_repository.rb": [
+      "/Users/jonathanbernesser/Turing/1module/Black_Thursday/black_thursday/lib/invoice_item_repository.rb": [
         1,
         1,
         1,
         null,
         1,
         1,
-        null,
         1,
         null,
         1,
@@ -248,7 +242,7 @@
         null,
         null
       ],
-      "/Users/thoms_mac/turing/1module/class_projects/1602_projects/black_thursday/lib/invoice_item.rb": [
+      "/Users/jonathanbernesser/Turing/1module/Black_Thursday/black_thursday/lib/invoice_item.rb": [
         1,
         1,
         null,
@@ -256,7 +250,6 @@
         1,
         null,
         null,
-        null,
         1,
         null,
         1,
@@ -269,8 +262,6 @@
         22304,
         null,
         22304,
-        null,
-        null,
         null,
         null,
         1,
@@ -291,14 +282,9 @@
         0,
         null,
         null,
-        null,
-        null,
-        null,
-        null,
-        null,
         null
       ],
-      "/Users/thoms_mac/turing/1module/class_projects/1602_projects/black_thursday/test/invoice_item_test.rb": [
+      "/Users/jonathanbernesser/Turing/1module/Black_Thursday/black_thursday/test/invoice_item_test.rb": [
         1,
         1,
         1,
@@ -307,7 +293,6 @@
         1,
         1,
         1,
-        null,
         null,
         1,
         1,
@@ -339,7 +324,7 @@
         null,
         null
       ],
-      "/Users/thoms_mac/turing/1module/class_projects/1602_projects/black_thursday/test/invoice_repository_test.rb": [
+      "/Users/jonathanbernesser/Turing/1module/Black_Thursday/black_thursday/test/invoice_repository_test.rb": [
         1,
         1,
         1,
@@ -348,7 +333,6 @@
         1,
         1,
         1,
-        null,
         null,
         1,
         1,
@@ -430,7 +414,7 @@
         null,
         null
       ],
-      "/Users/thoms_mac/turing/1module/class_projects/1602_projects/black_thursday/lib/invoice_repository.rb": [
+      "/Users/jonathanbernesser/Turing/1module/Black_Thursday/black_thursday/lib/invoice_repository.rb": [
         1,
         1,
         1,
@@ -502,14 +486,14 @@
         1,
         0,
         null,
+        null,
         null
       ],
-      "/Users/thoms_mac/turing/1module/class_projects/1602_projects/black_thursday/lib/invoice.rb": [
+      "/Users/jonathanbernesser/Turing/1module/Black_Thursday/black_thursday/lib/invoice.rb": [
         1,
         null,
         1,
         1,
-        null,
         null,
         null,
         1,
@@ -555,7 +539,7 @@
         null,
         null
       ],
-      "/Users/thoms_mac/turing/1module/class_projects/1602_projects/black_thursday/lib/standard_deviator.rb": [
+      "/Users/jonathanbernesser/Turing/1module/Black_Thursday/black_thursday/lib/standard_deviator.rb": [
         1,
         null,
         1,
@@ -569,11 +553,9 @@
         11,
         null,
         null,
-        null,
-        null,
         null
       ],
-      "/Users/thoms_mac/turing/1module/class_projects/1602_projects/black_thursday/test/invoice_test.rb": [
+      "/Users/jonathanbernesser/Turing/1module/Black_Thursday/black_thursday/test/invoice_test.rb": [
         1,
         1,
         1,
@@ -584,7 +566,6 @@
         1,
         1,
         1,
-        null,
         null,
         1,
         1,
@@ -659,9 +640,8 @@
         null,
         null
       ],
-      "/Users/thoms_mac/turing/1module/class_projects/1602_projects/black_thursday/lib/transaction.rb": [
+      "/Users/jonathanbernesser/Turing/1module/Black_Thursday/black_thursday/lib/transaction.rb": [
         1,
-        null,
         null,
         1,
         1,
@@ -688,121 +668,83 @@
         1,
         47,
         null,
-        null
-      ],
-      "/Users/thoms_mac/turing/1module/class_projects/1602_projects/black_thursday/test/item_repository_test.rb": [
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        null,
-        null,
-        1,
-        1,
-        1,
-        null,
-        1,
-        10,
-        10,
-        10,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        1,
-        1,
-        null,
-        1,
-        null,
-        null,
-        1,
-        1,
-        null,
-        1,
-        null,
-        null,
-        1,
-        1,
-        null,
-        1,
-        null,
-        null,
-        1,
-        1,
-        null,
-        1,
-        null,
-        null,
-        1,
-        1,
-        null,
-        1,
-        null,
-        null,
-        1,
-        1,
-        null,
-        1,
-        null,
-        null,
-        1,
-        1,
-        1,
-        null,
-        1,
-        1,
-        null,
-        1,
-        1,
-        1,
-        null,
-        null,
-        1,
-        1,
-        1,
-        null,
-        null,
-        null,
-        1,
-        null,
-        null,
-        1,
-        1,
-        null,
-        1,
-        1,
-        1,
-        null,
-        null,
-        1,
-        1,
-        null,
-        1,
-        null,
         null,
         null
       ],
-      "/Users/thoms_mac/turing/1module/class_projects/1602_projects/black_thursday/lib/item_repository.rb": [
+      "/Users/jonathanbernesser/Turing/1module/Black_Thursday/black_thursday/test/item_repository_test.rb": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        null,
+        1,
+        1,
+        1,
+        null,
+        1,
+        10,
+        10,
+        10,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        1,
+        1,
+        null,
+        1,
+        null,
+        null,
+        1,
+        1,
+        null,
+        1,
+        null,
+        null,
+        1,
+        1,
+        null,
+        1,
+        null,
+        null,
+        1,
+        1,
+        null,
+        1,
+        null,
+        null,
+        1,
+        1,
+        null,
+        1,
+        null,
+        null,
+        1,
+        1,
+        null,
+        1,
+        null,
+        null,
         1,
         1,
         1,
@@ -810,6 +752,43 @@
         1,
         1,
         null,
+        1,
+        1,
+        1,
+        null,
+        null,
+        1,
+        1,
+        1,
+        null,
+        null,
+        null,
+        1,
+        null,
+        null,
+        1,
+        1,
+        null,
+        1,
+        1,
+        1,
+        null,
+        null,
+        1,
+        1,
+        null,
+        1,
+        null,
+        null,
+        null
+      ],
+      "/Users/jonathanbernesser/Turing/1module/Black_Thursday/black_thursday/lib/item_repository.rb": [
+        1,
+        1,
+        1,
+        null,
+        1,
+        1,
         1,
         null,
         1,
@@ -864,15 +843,13 @@
         null,
         null
       ],
-      "/Users/thoms_mac/turing/1module/class_projects/1602_projects/black_thursday/lib/item.rb": [
+      "/Users/jonathanbernesser/Turing/1module/Black_Thursday/black_thursday/lib/item.rb": [
         1,
         1,
         1,
         null,
         1,
-        null,
         1,
-        null,
         null,
         1,
         null,
@@ -912,7 +889,7 @@
         null,
         null
       ],
-      "/Users/thoms_mac/turing/1module/class_projects/1602_projects/black_thursday/test/item_test.rb": [
+      "/Users/jonathanbernesser/Turing/1module/Black_Thursday/black_thursday/test/item_test.rb": [
         1,
         1,
         1,
@@ -921,7 +898,6 @@
         1,
         1,
         1,
-        null,
         null,
         1,
         1,
@@ -980,7 +956,7 @@
         null,
         null
       ],
-      "/Users/thoms_mac/turing/1module/class_projects/1602_projects/black_thursday/test/merchant_repository_test.rb": [
+      "/Users/jonathanbernesser/Turing/1module/Black_Thursday/black_thursday/test/merchant_repository_test.rb": [
         1,
         1,
         1,
@@ -1051,14 +1027,13 @@
         null,
         null
       ],
-      "/Users/thoms_mac/turing/1module/class_projects/1602_projects/black_thursday/lib/merchant_repository.rb": [
+      "/Users/jonathanbernesser/Turing/1module/Black_Thursday/black_thursday/lib/merchant_repository.rb": [
         1,
         1,
         1,
         null,
         1,
         1,
-        null,
         1,
         null,
         1,
@@ -1095,12 +1070,11 @@
         null,
         null
       ],
-      "/Users/thoms_mac/turing/1module/class_projects/1602_projects/black_thursday/lib/merchant.rb": [
+      "/Users/jonathanbernesser/Turing/1module/Black_Thursday/black_thursday/lib/merchant.rb": [
         1,
         null,
         1,
         1,
-        null,
         1,
         null,
         1,
@@ -1157,7 +1131,7 @@
         null,
         null
       ],
-      "/Users/thoms_mac/turing/1module/class_projects/1602_projects/black_thursday/lib/sales_engine.rb": [
+      "/Users/jonathanbernesser/Turing/1module/Black_Thursday/black_thursday/lib/sales_engine.rb": [
         1,
         1,
         1,
@@ -1291,7 +1265,7 @@
         null,
         null
       ],
-      "/Users/thoms_mac/turing/1module/class_projects/1602_projects/black_thursday/lib/transaction_repository.rb": [
+      "/Users/jonathanbernesser/Turing/1module/Black_Thursday/black_thursday/lib/transaction_repository.rb": [
         1,
         1,
         null,
@@ -1307,7 +1281,6 @@
         59,
         47,
         5445,
-        null,
         null,
         null,
         null,
@@ -1346,7 +1319,7 @@
         null,
         null
       ],
-      "/Users/thoms_mac/turing/1module/class_projects/1602_projects/black_thursday/test/merchant_test.rb": [
+      "/Users/jonathanbernesser/Turing/1module/Black_Thursday/black_thursday/test/merchant_test.rb": [
         1,
         1,
         1,
@@ -1390,7 +1363,7 @@
         null,
         null
       ],
-      "/Users/thoms_mac/turing/1module/class_projects/1602_projects/black_thursday/test/sales_analyst_test.rb": [
+      "/Users/jonathanbernesser/Turing/1module/Black_Thursday/black_thursday/test/sales_analyst_test.rb": [
         1,
         1,
         1,
@@ -1404,7 +1377,6 @@
         1,
         1,
         1,
-        null,
         null,
         1,
         1,
@@ -1549,7 +1521,7 @@
         null,
         null
       ],
-      "/Users/thoms_mac/turing/1module/class_projects/1602_projects/black_thursday/lib/sales_analyst.rb": [
+      "/Users/jonathanbernesser/Turing/1module/Black_Thursday/black_thursday/lib/sales_analyst.rb": [
         1,
         1,
         1,
@@ -1744,19 +1716,19 @@
         2,
         12,
         null,
+        null,
         null
       ],
-      "/Users/thoms_mac/turing/1module/class_projects/1602_projects/black_thursday/lib/sales_analyst_basic_operations.rb": [
+      "/Users/jonathanbernesser/Turing/1module/Black_Thursday/black_thursday/lib/sales_analyst_basic_operations.rb": [
         1,
         null,
         1,
         40,
         null,
         null,
-        null,
         null
       ],
-      "/Users/thoms_mac/turing/1module/class_projects/1602_projects/black_thursday/test/sales_engine_test.rb": [
+      "/Users/jonathanbernesser/Turing/1module/Black_Thursday/black_thursday/test/sales_engine_test.rb": [
         1,
         1,
         1,
@@ -1765,7 +1737,6 @@
         1,
         null,
         1,
-        null,
         1,
         null,
         1,
@@ -1855,7 +1826,7 @@
         null,
         null
       ],
-      "/Users/thoms_mac/turing/1module/class_projects/1602_projects/black_thursday/test/transaction_repository_test.rb": [
+      "/Users/jonathanbernesser/Turing/1module/Black_Thursday/black_thursday/test/transaction_repository_test.rb": [
         1,
         1,
         1,
@@ -1870,7 +1841,6 @@
         1,
         null,
         1,
-        null,
         11,
         11,
         null,
@@ -1947,7 +1917,7 @@
         null,
         null
       ],
-      "/Users/thoms_mac/turing/1module/class_projects/1602_projects/black_thursday/test/transaction_test.rb": [
+      "/Users/jonathanbernesser/Turing/1module/Black_Thursday/black_thursday/test/transaction_test.rb": [
         1,
         1,
         1,
@@ -1987,6 +1957,6 @@
         null
       ]
     },
-    "timestamp": 1457558863
+    "timestamp": 1457562337
   }
 }

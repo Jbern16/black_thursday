@@ -4,7 +4,6 @@ class Invoice
   attr_reader :id, :unit_price, :created_at,
               :updated_at, :customer_id,
               :status, :merchant_id
-
   attr_accessor :merchant, :items, :transactions, :customer, :invoice_items
 
   def initialize(data)

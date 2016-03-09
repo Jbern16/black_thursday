@@ -4,5 +4,4 @@ class BasicOperations
    (repo_1.all.length.to_f / repo_2.all.length.to_f).round(2)
   end
 
-
 end

@@ -4,7 +4,6 @@ require_relative 'item'
 
 class ItemRepository
   attr_accessor :items
-
   include CsvLoader
 
   def initialize(file_path=nil)

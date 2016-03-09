@@ -3,9 +3,7 @@ require 'pry'
 require_relative 'csv_loader'
 
 class CustomerRepository
-
   attr_accessor :customers
-
   include CsvLoader
 
   def initialize(file_path=nil)

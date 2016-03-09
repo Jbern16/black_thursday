@@ -4,7 +4,6 @@ require_relative 'merchant'
 
 class MerchantRepository
   attr_accessor :merchants
-
   include CsvLoader
 
   def initialize(file_path=nil)

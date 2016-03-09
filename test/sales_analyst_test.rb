@@ -12,7 +12,6 @@ require_relative '../lib/item'
 require_relative '../lib/invoice'
 require_relative '../lib/invoice_repository'
 
-
 class SalesAnalystTest < Minitest::Test
   attr_reader :se, :sa
 

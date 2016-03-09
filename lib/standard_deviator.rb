@@ -11,6 +11,4 @@ class StdDeviator
     mean + stddev * num_of_dev
   end
 
-
-
 end

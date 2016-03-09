@@ -7,7 +7,6 @@ require 'pry'
 require 'bigdecimal'
 require_relative '../lib/item'
 
-
 class ItemTest < Minitest::Test
   attr_reader :item
 

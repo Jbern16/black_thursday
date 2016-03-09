@@ -9,7 +9,6 @@ require_relative '../lib/invoice'
 require_relative '../lib/transaction'
 require_relative '../lib/invoice_item'
 
-
 class InvoiceTest < Minitest::Test
   attr_reader :invoice, :data
 

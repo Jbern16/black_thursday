@@ -5,7 +5,6 @@ class InvoiceItem
   attr_reader :id, :invoice_id, :item_id,
               :quantity, :created_at,
               :updated_at
-
   attr_accessor :invoice
 
   def initialize(data)
@@ -18,9 +17,7 @@ class InvoiceItem
     @unit_price = data[:unit_price].to_i
 
     @invoice = nil
-
   end
-
 
   def unit_price_to_dollars
       unit_price_as_dollars = @unit_price / 100.0
@@ -39,10 +36,5 @@ class InvoiceItem
   def inspect
     "#<#{self.class}>"
   end
-
-
-
-
-
 
 end

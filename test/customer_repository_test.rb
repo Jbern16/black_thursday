@@ -7,7 +7,6 @@ require 'bigdecimal'
 require_relative '../lib/customer_repository'
 require_relative '../lib/customer'
 
-
 class CustomerRepositoryTest < Minitest::Test
   attr_reader :customer_repo
               :customers

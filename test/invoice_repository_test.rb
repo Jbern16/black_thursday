@@ -7,7 +7,6 @@ require 'pry'
 require 'bigdecimal'
 require_relative '../lib/invoice_repository'
 
-
 class InvoiceRepositoryTest < Minitest::Test
       attr_reader :invoices, :invoice_repo
 

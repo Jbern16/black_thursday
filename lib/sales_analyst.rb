@@ -192,4 +192,5 @@ class SalesAnalyst
     max_value = table.values.max
     table.select {|_id, amount| amount == max_value}
   end
+
 end

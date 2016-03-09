@@ -12,7 +12,6 @@ class TransactionRepositoryTest < Minitest::Test
       attr_reader :transactions, :transaction_repo
 
  def setup
-
    @transaction_repo = TransactionRepository.new
    @transactions = transaction_repo.transactions =
                   [Transaction.new({

@@ -4,7 +4,6 @@ require_relative 'csv_loader'
 
 class InvoiceItemRepository
   attr_accessor :invoice_items
-
   include CsvLoader
 
   def initialize(file_path=nil)

@@ -165,16 +165,18 @@ class SalesAnalyst
     max_items.keys.map {|id| items.find_by_id(id)}
   end
 
-  def max_items_by_quantity(table)
-    max_value = table.values.max
-    table.select {|id, amount| amount == max_value}
+  def best_item_for_merchant(merchant_id)
+    paid_invoice_items = find_invoice_items(merchant_id)
+    best_item_id = max_items(paid_invoice_items,'total').keys.first
+
+    items.find_by_id(best_item_id)
   end
 
   def find_invoice_items(merchant_id)
     merchant = merchants.find_by_id(merchant_id)
-    merchant.paid_merchant_invoices.map do |paid_invoice|
+    merchant.paid_merchant_invoices.flat_map do |paid_invoice|
       invoice_items.find_all_by_invoice_id(paid_invoice.id)
-    end.flatten
+    end
   end
 
   def max_items(paid_invoice_items, function)
@@ -188,10 +190,9 @@ class SalesAnalyst
     max_items_by_quantity(table)
   end
 
-  def best_item_for_merchant(merchant_id)
-    paid_invoice_items = find_invoice_items(merchant_id)
-    best_item_id = max_items(paid_invoice_items,'total').keys.first
-
-    items.find_by_id(best_item_id)
+  def max_items_by_quantity(table)
+    max_value = table.values.max
+    table.select {|id, amount| amount == max_value}
   end
+
 end
